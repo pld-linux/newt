@@ -1,6 +1,7 @@
-
-%bcond_with	c_only	# - build only C libraries
-
+#
+# Conditional build:
+%bcond_with	c_only	# build only C libraries
+#
 %include	/usr/lib/rpm/macros.python
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
@@ -9,7 +10,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50.34
-Release:	8
+Release:	9
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
@@ -20,7 +21,8 @@ Patch2:		%{name}-install_sh.patch
 Patch3:		%{name}-gpm-fix.diff
 Patch4:		%{name}-omg_fix.patch
 Patch5:		%{name}-PIC.patch
-Patch6:		%{name}-c_only.patch
+Patch6:		%{name}-norm.patch
+Patch7:		%{name}-c_only.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -75,7 +77,7 @@ Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(pl):	Pliki nag³ówkowe dla newt
 Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 These are the header files and libraries for developing applications
@@ -104,7 +106,7 @@ kitaplýðýdýr.
 Summary:	Newt static library
 Summary(pl):	Biblioteka statyczna newt
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Newt static library.
@@ -116,7 +118,7 @@ Biblioteka statyczna newt.
 Summary:	Newt Tcl bindings
 Summary(pl):	Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description tcl
 Newt Tcl bindings.
@@ -128,10 +130,9 @@ Dodatki do Tcl z Newta
 Summary:	Newt python bindings
 Summary(pl):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
-Requires:	%{name} = %{version}
-Requires:	python >= 1.5
-Provides:	snack
+Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq	python
+Provides:	snack
 
 %description python
 Newt python bindings
@@ -164,8 +165,9 @@ przyjazny.
 %patch3 -p1
 %patch4 -p0
 %patch5 -p1
-%if %{with c_only}
 %patch6 -p1
+%if %{with c_only}
+%patch7 -p1
 %endif
 
 %build
@@ -173,15 +175,18 @@ przyjazny.
 %{__autoconf}
 %configure \
 	--enable-gpm-support
-%{__make} PROGS="whiptail %{?!with_c_only:whiptcl.so} testgrid"
-%{__make} shared
+
+%{__make} \
+	PROGS="whiptail %{?!with_c_only:whiptcl.so} testgrid"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
 
-%{__make} instroot=$RPM_BUILD_ROOT libdir=%{_libdir} install
-%{__make} instroot=$RPM_BUILD_ROOT libdir=%{_libdir} install-sh
+%{__make} install \
+	instroot=$RPM_BUILD_ROOT \
+	libdir=%{_libdir} \
+	pythondir=%{py_sitedir} \
+	pythonbindir=%{py_sitedir}
 
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
@@ -207,16 +212,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files python
 %defattr(644,root,root,755)
-%{_libdir}/python*/*.py
-%attr(755,root,root) %{py_libdir}/lib-dynload/*.so
+%attr(755,root,root) %{py_sitedir}/*.so
+%{py_sitedir}/*.py
 %endif
 
 %files devel
 %defattr(644,root,root,755)
 %doc CHANGES
 #tutorial.txt
-%{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
+%{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
