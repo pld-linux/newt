@@ -13,7 +13,7 @@ Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 BuildPrereq:	slang-devel
 BuildPrereq:	tcl-devel
 BuildPrereq:	popt-devel
-Buildroot:   	/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Newt is a windowing toolkit for text mode built from the slang library. It
