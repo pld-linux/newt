@@ -126,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 - added static subpackage,
 - recompiled against slang 1.2.x,
 - added stripping shared libraries,
-- added %attr and %defattr macros in %files (allow build package from
+- added %attr and %defattr macros in %files (allows build package from
   non-root account).
 
 * Thu May 07 1998 Prospector System <bugs@redhat.com>
