@@ -4,8 +4,8 @@ Summary(fr): 	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl): 	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr): 	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        	newt
-Version:     	0.30
-Release:     	6
+Version:     	0.40
+Release:     	9
 Copyright:   	LGPL
 Group:       	Libraries
 Group(pl):   	Biblioteki
@@ -128,7 +128,9 @@ Dodatki do python'a z Newt'a
 %setup -q
 
 %build
-make 
+./configure \
+	--enable-gpm-support
+make PROGS="whiptail whiptcl.so testgrid"
 make shared 
 
 %install
