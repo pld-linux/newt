@@ -125,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 - added using %%{name} and %%{version} in Source,
 - added static subpackage,
 - recompiled against slang 1.2.x,
-- added striping shared libraries,
+- added stripping shared libraries,
 - added %attr and %defattr macros in %files (allow build package from
   non-root account).
 
