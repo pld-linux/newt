@@ -1,3 +1,6 @@
+
+%bcond_with	c_only	# - build only C libraries
+
 %include	/usr/lib/rpm/macros.python
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
@@ -16,14 +19,15 @@ Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
 Patch3:		%{name}-gpm-fix.diff
 Patch4:		%{name}-omg_fix.patch
+Patch5:		%{name}-c_only.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	popt-devel
-BuildRequires:	python-devel >= 2.2
+%{?!with_c_only:BuildRequires:	python-devel >= 2.2}
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
-BuildRequires:	tcl-devel >= 8.3.2
+%{?!with_c_only:BuildRequires:	tcl-devel >= 8.3.2}
 BuildRequires:	docbook-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -158,21 +162,24 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p0
+%if %{with c_only}
+%patch5 -p1
+%endif
 
 %build
 %{__aclocal}
 %{__autoconf}
 %configure \
 	--enable-gpm-support
-%{__make} PROGS="whiptail whiptcl.so testgrid"
+%{__make} PROGS="whiptail %{?!with_c_only:whiptcl.so} testgrid"
 %{__make} shared
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} instroot=$RPM_BUILD_ROOT install
-%{__make} instroot=$RPM_BUILD_ROOT install-sh
+%{__make} instroot=$RPM_BUILD_ROOT libdir=%{_libdir} install
+%{__make} instroot=$RPM_BUILD_ROOT libdir=%{_libdir} install-sh
 
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
@@ -191,6 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/whiptail
 
+%if ! %{with c_only}
 %files tcl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*tcl.so
@@ -199,6 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/python*/*.py
 %attr(755,root,root) %{py_libdir}/lib-dynload/*.so
+%endif
 
 %files devel
 %defattr(644,root,root,755)
