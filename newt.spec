@@ -153,6 +153,8 @@ friendly manner.
 %patch0 -p1 
 
 %build
+aclocal
+autoconf
 %configure \
 	--enable-gpm-support
 %{__make} PROGS="whiptail whiptcl.so testgrid" 
