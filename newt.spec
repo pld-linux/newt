@@ -6,7 +6,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50.34
-Release:	3
+Release:	4
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
@@ -19,7 +19,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	sgml-tools
+#BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel >= 8.3.2
 BuildRequires:	docbook-utils
@@ -173,13 +173,9 @@ install -d $RPM_BUILD_ROOT
 
 
 #it just plain doesn't work... fix it if you can
-%ifnarch ppc
-sgml2txt tutorial.sgml
+#sgml2txt tutorial.sgml
 
-gzip -9nf CHANGES tutorial.txt
-%else
-gzip -9nf CHANGES
-%endif
+gzip -9nf CHANGES tutorial.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
