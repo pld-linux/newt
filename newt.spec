@@ -124,7 +124,7 @@ Group:		Development/Languages/Python
 Requires:	%{name} = %{version}
 Requires:	python >= 1.5
 Provides:	snack
-%requires_eq	python
+%pyrequires_eq	python
 
 %description python
 Newt python bindings
