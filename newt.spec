@@ -5,15 +5,16 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50
-Release:	15
+Release:	16
 License:	LGPL
 Group:		Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
+Patch0:		newt-pythondirs.patch
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 1.6b1
 BuildRequires:	popt-devel
 BuildRequires:	sgml-tools
 Provides:	dialog
@@ -145,6 +146,7 @@ manner.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 LDFLAGS="-s"
@@ -152,15 +154,27 @@ CFLAGS="$RPM_OPT_FLAGS"
 export LDFLAGS CFLAGS
 %configure \
 	--enable-gpm-support
-%{__make} PROGS="whiptail whiptcl.so testgrid"
-%{__make} shared 
+%{__make} PROGS="whiptail whiptcl.so testgrid" \
+	pythondir = \$(prefix)/lib/python1.6 \
+	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir = \$(prefix)/include/python1.6
+%{__make} shared \
+	pythondir = \$(prefix)/lib/python1.6 \
+	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir = \$(prefix)/include/python1.6
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} instroot=$RPM_BUILD_ROOT install
-%{__make} instroot=$RPM_BUILD_ROOT install-sh
+%{__make} instroot=$RPM_BUILD_ROOT install \
+	pythondir = \$(prefix)/lib/python1.6 \
+	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir = \$(prefix)/include/python1.6
+%{__make} instroot=$RPM_BUILD_ROOT install-sh \
+	pythondir = \$(prefix)/lib/python1.6 \
+	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir = \$(prefix)/include/python1.6
 
 ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
