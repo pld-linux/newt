@@ -234,7 +234,7 @@ rm -rf $RPM_BUILD_ROOT
 %files python
 %defattr(644,root,root,755)
 %{_libdir}/python*/*.py
-%attr(755,root,root) %{py_sitedir}/lib-dynload/*.so
+%attr(755,root,root) %{py_libdir}/lib-dynload/*.so
 
 %files devel
 %defattr(644,root,root,755)
