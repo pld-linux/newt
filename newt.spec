@@ -171,7 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %doc tutorial.sgml.gz
 
-%attr(644,root,root) /usr/include/*.h
+%attr(644,root,root) %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
 
 %files static
