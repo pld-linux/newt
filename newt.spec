@@ -146,7 +146,7 @@ manner.
 
 %prep
 %setup -q
-%patch0 -p1 -b .wiget
+%patch0 -p1 
 
 %build
 LDFLAGS="-s"
@@ -161,20 +161,10 @@ export LDFLAGS CFLAGS
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} instroot=$RPM_BUILD_ROOT install \
-	pythondir="\$(prefix)/lib/python1.6" \
-	pythonbindir="\$(prefix)/lib/python1.6/lib-dynload" \
-	pythonincludedir="\$(prefix)/include/python1.6"
-%{__make} instroot=$RPM_BUILD_ROOT install-sh \
-	pythondir="\$(prefix)/lib/python1.6" \
-	pythonbindir="\$(prefix)/lib/python1.6/lib-dynload" \
-	pythonincludedir="\$(prefix)/include/python1.6"
+%{__make} instroot=$RPM_BUILD_ROOT install 
+%{__make} instroot=$RPM_BUILD_ROOT install-sh 
 
 ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
-
-#strip $RPM_BUILD_ROOT%{_bindir}/*
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
-	$RPM_BUILD_ROOT%{_libdir}/python*/lib-dynload/*.so
 
 sgml2txt tutorial.sgml
 
