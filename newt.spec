@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.python
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang 
 Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
@@ -5,13 +6,14 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50.34
-Release:	1
+Release:	3
 License:	LGPL
 Group:		Libraries
-Group(de):	Libraries
+Group(de):	Bibliotheken
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt):	Bibliotecas
 Group(pt_BR):	Bibliotecas
 Group(ru):	âÉÂÌÉÏÔÅËÉ
 Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
@@ -23,11 +25,11 @@ Patch3:		%{name}-gpm-fix.diff
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	popt-devel
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel >= 8.3.2
-BuildRequires:	python-devel >= 2.0
-BuildRequires:	popt-devel
-BuildRequires:	sgml-tools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -73,11 +75,12 @@ Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(pl):	Pliki nag³ówkowe dla newt
 Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
@@ -109,11 +112,12 @@ kitaplýðýdýr.
 Summary:	Newt static library
 Summary(pl):	Biblioteka statyczna newt
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
+Group(de):	Entwicklung/Bibliotheken
 Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(pt):	Desenvolvimento/Bibliotecas
 Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
 Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
@@ -129,7 +133,10 @@ Summary:	Newt Tcl bindings
 Summary(pl):	Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
+Group(es):	Desarrollo/Lenguages/Tcl
+Group(fr):	Development/Langues/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
+Group(pt):	Desenvolvimento/Línguas/Tcl
 Requires:	%{name} = %{version}
 
 %description tcl
@@ -143,10 +150,14 @@ Summary:	Newt python bindings
 Summary(pl):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
 Group(de):	Entwicklung/Sprachen/Python
+Group(es):	Desarrollo/Lenguages/Python
+Group(fr):	Development/Langues/Python
 Group(pl):	Programowanie/Jêzyki/Python
+Group(pt):	Desenvolvimento/Línguas/Python
 Requires:	%{name} = %{version}
 Requires:	python >= 1.5
 Provides:	snack
+%requires_eq	python
 
 %description python
 Newt python bindings
@@ -159,7 +170,10 @@ Summary:	A dialog compliant program to build tty dialog boxes
 Summary(pl):	Program do tekstowych okienek dialogowych kompatybilny z dialog
 Group:		Applications/Terminal
 Group(de):	Applikationen/Terminal
+Group(es):	Aplicaciones/Terminal
+Group(fr):	Aplicaciones/Terminal
 Group(pl):	Aplikacje/Terminal
+Group(pt):	Aplicações/Terminal
 
 %description -n whiptail
 Dialog compliant utility that allows you to build user interfaces in a
@@ -220,7 +234,7 @@ rm -rf $RPM_BUILD_ROOT
 %files python
 %defattr(644,root,root,755)
 %{_libdir}/python*/*.py
-%attr(755,root,root) %{_libdir}/python*/lib-dynload/*.so
+%attr(755,root,root) %{py_sitedir}/lib-dynload/*.so
 
 %files devel
 %defattr(644,root,root,755)
