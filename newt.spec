@@ -4,8 +4,8 @@ Summary(fr):	Not Erik's Windowing Toolkit - fenЙtrage en mode texte avec slang
 Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.50.18
-Release:	2
+Version:	0.50.34
+Release:	1
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
@@ -17,6 +17,9 @@ Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pythondirs.patch
+Patch1:		%{name}-textbox.patch
+Patch2:		%{name}-install_sh.patch
+Patch3:		%{name}-gpm-fix.diff
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -173,6 +176,9 @@ przyjazny.
 %prep
 %setup -q
 %patch0 -p1 
+%patch1 -p1 
+%patch2 -p1 
+%patch3 -p1 
 
 %build
 aclocal
