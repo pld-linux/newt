@@ -155,26 +155,26 @@ export LDFLAGS CFLAGS
 %configure \
 	--enable-gpm-support
 %{__make} PROGS="whiptail whiptcl.so testgrid" \
-	pythondir = \$(prefix)/lib/python1.6 \
-	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
-	pythonincludedir = \$(prefix)/include/python1.6
+	pythondir=\$(prefix)/lib/python1.6 \
+	pythonbindir=\$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir=\$(prefix)/include/python1.6
 %{__make} shared \
-	pythondir = \$(prefix)/lib/python1.6 \
-	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
-	pythonincludedir = \$(prefix)/include/python1.6
+	pythondir=\$(prefix)/lib/python1.6 \
+	pythonbindir=\$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir=\$(prefix)/include/python1.6
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
 %{__make} instroot=$RPM_BUILD_ROOT install \
-	pythondir = \$(prefix)/lib/python1.6 \
-	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
-	pythonincludedir = \$(prefix)/include/python1.6
+	pythondir=\$(prefix)/lib/python1.6 \
+	pythonbindir=\$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir=\$(prefix)/include/python1.6
 %{__make} instroot=$RPM_BUILD_ROOT install-sh \
-	pythondir = \$(prefix)/lib/python1.6 \
-	pythonbindir = \$(prefix)/lib/python1.6/lib-dynload \
-	pythonincludedir = \$(prefix)/include/python1.6
+	pythondir=\$(prefix)/lib/python1.6 \
+	pythonbindir=\$(prefix)/lib/python1.6/lib-dynload \
+	pythonincludedir=\$(prefix)/include/python1.6
 
 ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
