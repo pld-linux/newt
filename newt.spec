@@ -4,8 +4,8 @@ Summary(fr): 	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl): 	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr): 	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        	newt
-Version:     	0.40
-Release:     	9
+Version:     	0.50
+Release:     	1
 Copyright:   	LGPL
 Group:       	Libraries
 Group(pl):   	Biblioteki
