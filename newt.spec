@@ -5,7 +5,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50
-Release:	14
+Release:	15
 License:	LGPL
 Group:		Libraries
 Group(fr):	Librairies
@@ -27,7 +27,7 @@ stackable windows, push buttons, check boxes, radio buttons, lists,
 entry fields, labels, and displayable text. Scrollbars are supported,
 and forms may be nested to provide extra functionality. This pacakge
 contains the shared library for programs that have been built with
-newt as well as a dialog replacement called whiptail.
+newt.
 
 %description -l de
 Newt ist ein Windowing-Toolkit für Textmodus, konstruiert auf der
@@ -36,17 +36,14 @@ Applikationen leicht mit stapelbaren Fenstern, Schaltflächen,
 Optionskästchen, Listen, Eingabefeldern, Etiketten und Display-Text
 arbeiten können. Auch Bildlaufleisten erden unterstützt, und der
 Einbau von Formularen ist möglich, wenn zusätzliche Funktionalität
-gefordert ist. Dieses Paket enthält die gemeinsam nutzbare Library für
-mit Newt gebaute Programme sowie einen dialog namens whiptail.
+gefordert ist. 
 
 %description -l fr
 Newt est une boite à outil de fenétrage en mode texte, construit sur
 la librarie slang. Elle permet aux applications en mode texte
 d'utiliser simplement de multiples fenêtres, des bouttons, des cases à
 cocher... Les barres de défilement sont supportées, et les fenêtres
-peuvent être imbriquées pour donner des fonctionnalités nouvelles. Ce
-package contient les librairies partagées pour les programmes
-construits avec newt comme un remplaçant pour dialog appelé whiptail.
+peuvent être imbriquées pour donner des fonctionnalités nouvelles. 
 
 %description -l pl
 Newt jest bibliotek± typu toolkit ale to trybu tekstowego osadzon± na
@@ -54,14 +51,10 @@ bibliotece slang. Umo¿liwia budowanie aplikacji pracuj±cych w trybie
 tekstowym umo¿liwij±c operowanie na okienkach, przyciskach (push
 button), listach wyboru, etykietach i elementach tekstowych jakie s±
 potrzebne przy tworzeniu interfejsu u¿ytkownika w ró¿nych aplikacjach.
-Pakiet zawiera biblitekê wspó³dzielon± i program whiptail, który jest
-zamiennikiem programu dialog.
 
 %description -l tr
 Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma
-çubuklarý, çeþitli tuþlar oluþturulabilir. Bu paket newt kullanan
-yazýlýmlarýn gerek duyacaðý kitaplýðý ve whiptail isimli geliþmiþ bir
-dialog sürümü içermektedir.
+çubuklarý, çeþitli tuþlar oluþturulabilir. 
 
 %package devel
 Summary:	Developer's toolkit for newt windowing library
@@ -139,6 +132,17 @@ Newt python bindings
 %description python -l pl
 Dodatki do python'a z Newt'a.
 
+%package -n whiptail
+Summary:	A dialog compliant program to build tty dialog boxes
+Group:          Utilities/Terminal
+Group(pl):      Narzêdzia/Terminal
+
+%description -n whiptail
+Dialog compliant utility that allows you to build user interfaces in a TTY 
+(text mode only). You can call dialog from within a shell script to
+ask the user questions or present with choices in a more user friendly
+manner.
+
 %prep
 %setup -q
 
@@ -177,6 +181,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so.*.*
+
+%files -n whiptail
 %attr(755,root,root) %{_bindir}/whiptail
 %attr(755,root,root) %{_bindir}/dialog
 
