@@ -162,7 +162,7 @@ install -d $RPM_BUILD_ROOT
 %{__make} instroot=$RPM_BUILD_ROOT install
 %{__make} instroot=$RPM_BUILD_ROOT install-sh
 
-ln -s ./whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
+ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
 #strip $RPM_BUILD_ROOT%{_bindir}/*
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
