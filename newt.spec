@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
   [0.30-4]
 - added Group(pl)
-- added tutorial (was missed)
+- added missing tutorial
 - added gzipping documentation
 - cosmetic changes
 
