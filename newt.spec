@@ -156,26 +156,26 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES.gz
 
-%attr(755,root,root) /usr/lib/*.so.*
+%attr(755,root,root) %{_libdir}/*.so.*
 %attr(755,root,root) /usr/bin/whiptail
 
 %files tcl 
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/lib/*tcl.so
+%attr(755,root,root) %{_libdir}/*tcl.so
 
 %files python
 %defattr(644,root,root,755)
-/usr/lib/python1.5/*.py
-%attr(755,root,root) /usr/lib/python1.5/lib-dynload/*.so
+%{_libdir}/python1.5/*.py
+%attr(755,root,root) %{_libdir}/python1.5/lib-dynload/*.so
 
 %files devel
 %doc tutorial.sgml.gz
 
 %attr(644,root,root) /usr/include/*.h
-%attr(755,root,root) /usr/lib/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 
 %files static
-%attr(644,root,root) /usr/lib/*.a
+%attr(644,root,root) %{_libdir}/*.a
 
 %changelog
 * Wed Apr 21 1999 Artur Frysiak <wiget@pld.org.pl>
