@@ -180,7 +180,7 @@ ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
 #strip $RPM_BUILD_ROOT%{_bindir}/*
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
-	$RPM_BUILD_ROOT%{_libdir}/python1.5/lib-dynload/*.so
+	$RPM_BUILD_ROOT%{_libdir}/python*/lib-dynload/*.so
 
 sgml2txt tutorial.sgml
 
@@ -206,8 +206,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files python
 %defattr(644,root,root,755)
-%{_libdir}/python1.5/*.py
-%attr(755,root,root) %{_libdir}/python1.5/lib-dynload/*.so
+%{_libdir}/python*/*.py
+%attr(755,root,root) %{_libdir}/python*/lib-dynload/*.so
 
 %files devel
 %defattr(644,root,root,755)
