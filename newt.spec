@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.python
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
-Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang 
+Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
 Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
@@ -62,7 +62,7 @@ Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma
 
 %package devel
 Summary:	Developer's toolkit for newt windowing library
-Summary(de):	Entwickler-Toolkit für die newt-Windowing-Library 
+Summary(de):	Entwickler-Toolkit für die newt-Windowing-Library
 Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(pl):	Pliki nag³ówkowe dla newt
 Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
@@ -74,20 +74,20 @@ These are the header files and libraries for developing applications
 which use newt. Newt is a windowing toolkit for text mode, which
 provides many widgets and stackable windows.
 
-%description -l de devel
+%description devel -l de
 Dies sind die Header-Dateien und Libraries zur Entwicklung von
 Applikationen, die mit newt arbeiten. Newt ist ein Windowing-Toolkit
 für Textmodus, der viele Widgets und stapelbare Fenster enthält.
 
-%description -l fr devel
+%description devel -l fr
 En-têtes et bibliothèques pour le développement d'applications
 utilisant newt. newt est un tookit de fenêtrage pour le mode texte
 offrant de nombreux widgets et des fenêtres empilables.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe dla newt.
 
-%description -l tr devel
+%description devel -l tr
 Bu paket, newt ile geliþtirme yapmak için gereken baþlýk dosyalarýný
 ve kitaplýklarý içerir. Newt, metin ekranda çalýþan bir pencereleme
 kitaplýðýdýr.
@@ -101,7 +101,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 Newt static library.
 
-%description -l pl static
+%description static -l pl
 Biblioteka statyczna newt.
 
 %package tcl
@@ -113,7 +113,7 @@ Requires:	%{name} = %{version}
 %description tcl
 Newt Tcl bindings.
 
-%description -l pl tcl 
+%description tcl -l pl
 Dodatki do Tcl z Newta
 
 %package python
@@ -150,25 +150,25 @@ przyjazny.
 
 %prep
 %setup -q
-%patch0 -p1 
-%patch1 -p1 
-%patch2 -p1 
-%patch3 -p1 
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 aclocal
 autoconf
 %configure \
 	--enable-gpm-support
-%{__make} PROGS="whiptail whiptcl.so testgrid" 
-%{__make} shared 
+%{__make} PROGS="whiptail whiptcl.so testgrid"
+%{__make} shared
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-%{__make} instroot=$RPM_BUILD_ROOT install 
-%{__make} instroot=$RPM_BUILD_ROOT install-sh 
+%{__make} instroot=$RPM_BUILD_ROOT install
+%{__make} instroot=$RPM_BUILD_ROOT install-sh
 
 sgml2txt tutorial.sgml
 
@@ -188,7 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/whiptail
 
-%files tcl 
+%files tcl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*tcl.so
 
