@@ -1,13 +1,15 @@
 Summary:     Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de): Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang 
 Summary(fr): Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
+Summary(pl): Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr): Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        newt
 Version:     0.30
-Release:     3
+Release:     4
 Copyright:   LGPL
 Group:       Libraries
-Source:      ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
+Group(pl):   Biblioteki
+Source:      ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 Requires:    slang
 Provides:    snack
 Buildroot:   /tmp/%{name}-%{version}-root
@@ -20,6 +22,10 @@ displayable text. Scrollbars are supported, and forms may be nested to
 provide extra functionality. This pacakge contains the shared library for
 programs that have been built with newt as well as a /usr/bin/dialog
 replacement called whiptail.
+
+%description -l pl
+Newt jest programem do okien w trybie tekstowym, budowany ze slangiem.
+Pozwala na u¿ywanie kolorowych alikacji tekstowych w oknach.
 
 %description -l de
 Newt ist ein Windowing-Toolkit für Textmodus, konstruiert auf der Grundlage
@@ -49,15 +55,20 @@ içermektedir.
 %package devel
 Summary:     Developer's toolkit for newt windowing library
 Summary(de): Entwickler-Toolkit für die newt-Windowing-Library 
+Summary(pl): Pliki nag³ówkowe dla newt
 Summary(fr): Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(tr): newt pencere kitaplýðý için geliþtirme dosyalarý
-Requires:    slang-devel, %{name} = %{version}
 Group:       Development/Libraries
+Group(pl):   Programowanie/Biblioteki
+Requires:    %{name} = %{version}
 
 %description devel
 These are the header files and libraries for developing applications which
 use newt. Newt is a windowing toolkit for text mode, which provides many
 widgets and stackable windows.
+
+%description -l pl devel
+Pliki nag³ówkowe dla newt.
 
 %description -l de devel
 Dies sind die Header-Dateien und Libraries zur Entwicklung von
@@ -75,26 +86,34 @@ kitaplýklarý içerir. Newt, metin ekranda çalýþan bir pencereleme kitaplýðýdýr.
 
 %package static
 Summary:     Newt static library
+Summary(pl): Biblioteka statyczna newt
 Group:       Development/Libraries
+Group(pl):   Programowanie/Biblioteki
 Requires:    %{name}-devel = %{version}
 
 %description static
 Newt static library.
 
+%description -l pl static
+Biblioteka statyczna newt.
+
 %prep
 %setup -q
 
 %build
-make
-make shared
+make 
+make shared 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
+
 make instroot=$RPM_BUILD_ROOT install
 make instroot=$RPM_BUILD_ROOT install-sh
 
-strip $RPM_BUILD_ROOT/usr/lib/{lib*.so.*,python1.5/lib-dynload/_snackmodule.so}
+strip $RPM_BUILD_ROOT/usr/bin/*
+
+gzip -9nf CHANGES tutorial.sgml
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -103,30 +122,49 @@ strip $RPM_BUILD_ROOT/usr/lib/{lib*.so.*,python1.5/lib-dynload/_snackmodule.so}
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(755, root, root)
-/usr/lib/lib*.so.*
-/usr/bin/whiptail
-/usr/lib/python1.5/snack.py
-/usr/lib/python1.5/lib-dynload/_snackmodule.so
+%defattr(644,root,root,755)
+%doc CHANGES.gz
+
+%attr(755,root,root) /usr/lib/*.so.*
+%attr(711,root,root) /usr/bin/whiptail
+%attr(755,root,root) /usr/lib/*tcl.so
+%attr(644,root,root) /usr/lib/python1.5/*.py
+%attr(755,root,root) /usr/lib/python1.5/lib-dynload/*.so
 
 %files devel
-%defattr(644, root, root)
-/usr/include/newt.h
-/usr/lib/libnewt.so
+%doc tutorial.sgml.gz
+
+%attr(644,root,root) /usr/include/*.h
+%attr(755,root,root) /usr/lib/lib*.so
 
 %files static
-%attr(644, root, root) /usr/lib/lib*.a
+%attr(644,root,root) /usr/lib/*.a
 
 %changelog
+* Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
+  [0.30-4]
+- added Group(pl)
+- added tutorial (was missed)
+- added gzipping documentation
+- cosmetic changes
+
+* Mon Oct 05 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+[0.30-3d]
+- build against PLD Tornado,
+- translation modified for pl,
+- fixed files permissions.
+- changed %defattr(755,root,root) to %defattr(644,root,root,755),
+- minor modifications of the spec file.
+
 * Thu Sep  3 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.30-3]
+[0.30-3]
 - added -q %setup parameter,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
 - added static subpackage,
 - recompiled against slang 1.2.x,
-- added stripping shared libraries,
-- added %attr and %defattr macros in %files (allows build package from
+- added striping shared libraries,
+- added %attr and %defattr macros in %files (allow build package from
   non-root account).
 
 * Thu May 07 1998 Prospector System <bugs@redhat.com>
