@@ -10,9 +10,9 @@ Copyright:   	LGPL
 Group:       	Libraries
 Group(pl):   	Biblioteki
 Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
-BuildPrereq:	slang-devel
-BuildPrereq:	tcl-devel
-BuildPrereq:	popt-devel
+BuildRequires:	slang-devel
+BuildRequires:	tcl-devel
+BuildRequires:	popt-devel
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
