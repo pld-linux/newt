@@ -10,6 +10,7 @@ Release:	5
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
+# Source0-md5: e4b4a030cd8d7ee1a4d83ad73dfbb1bb
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
