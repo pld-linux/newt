@@ -5,7 +5,7 @@ Summary(pl): 	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr): 	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        	newt
 Version:     	0.50
-Release:     	1
+Release:     	13
 Copyright:   	LGPL
 Group:       	Libraries
 Group(pl):   	Biblioteki
@@ -13,6 +13,7 @@ Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel
 BuildRequires:	popt-devel
+BuildRequires:	sgml-tools
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
@@ -21,12 +22,8 @@ allows color text mode applications to easily use stackable windows, push
 buttons, check boxes, radio buttons, lists, entry fields, labels, and
 displayable text. Scrollbars are supported, and forms may be nested to
 provide extra functionality. This pacakge contains the shared library for
-programs that have been built with newt as well as a %{_bindir}/dialog
-replacement called whiptail.
-
-%description -l pl
-Newt jest programem do okien w trybie tekstowym, budowany ze slangiem.
-Pozwala na u¿ywanie kolorowych alikacji tekstowych w oknach.
+programs that have been built with newt as well as a dialog replacement
+called whiptail.
 
 %description -l de
 Newt ist ein Windowing-Toolkit für Textmodus, konstruiert auf der Grundlage
@@ -36,7 +33,7 @@ Eingabefeldern, Etiketten und Display-Text arbeiten können. Auch
 Bildlaufleisten erden unterstützt, und der Einbau von Formularen ist
 möglich, wenn zusätzliche Funktionalität gefordert ist. Dieses Paket enthält
 die gemeinsam nutzbare Library für mit Newt gebaute Programme sowie einen
-%{_bindir}/dialog namens whiptail.
+dialog namens whiptail.
 
 %description -l fr
 Newt est une boite à outil de fenétrage en mode texte, construit sur la
@@ -45,7 +42,16 @@ simplement de multiples fenêtres, des bouttons, des cases à cocher... Les
 barres de défilement sont supportées, et les fenêtres peuvent être
 imbriquées pour donner des fonctionnalités nouvelles. Ce package contient
 les librairies partagées pour les programmes construits avec newt comme un
-remplaçant pour %{_bindir}/dialog appelé whiptail.
+remplaçant pour dialog appelé whiptail.
+
+%description -l pl
+Newt jest bibliotek± typu toolkit ale to trybu tekstowego osadzon± na
+bibliotece slang. Umo¿liwia budowanie aplikacji pracuj±cych w trybie
+tekstowym umo¿liwij±c operowanie na okienkach, przyciskach (push button),
+listach wyboru, etykietach i elementach tekstowych jakie s± potrzebne przy
+tworzeniu interfejsu u¿ytkownika w ró¿nych aplikacjach. Pakiet zawiera
+biblitekê wspó³dzielon± i program whiptail, który jest zamiennikiem programu
+dialog.
 
 %description -l tr
 Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma çubuklarý,
@@ -56,8 +62,8 @@ içermektedir.
 %package devel
 Summary:     	Developer's toolkit for newt windowing library
 Summary(de): 	Entwickler-Toolkit für die newt-Windowing-Library 
-Summary(pl): 	Pliki nag³ówkowe dla newt
 Summary(fr): 	Toolkit de développement pour la bibliothèque de fenêtrage newt
+Summary(pl): 	Pliki nag³ówkowe dla newt
 Summary(tr): 	newt pencere kitaplýðý için geliþtirme dosyalarý
 Group:       	Development/Libraries
 Group(pl):   	Programowanie/Biblioteki
@@ -68,9 +74,6 @@ These are the header files and libraries for developing applications which
 use newt. Newt is a windowing toolkit for text mode, which provides many
 widgets and stackable windows.
 
-%description -l pl devel
-Pliki nag³ówkowe dla newt.
-
 %description -l de devel
 Dies sind die Header-Dateien und Libraries zur Entwicklung von
 Applikationen, die mit newt arbeiten. Newt ist ein Windowing-Toolkit für
@@ -80,6 +83,9 @@ Textmodus, der viele Widgets und stapelbare Fenster enthält.
 En-têtes et bibliothèques pour le développement d'applications utilisant
 newt. newt est un tookit de fenêtrage pour le mode texte offrant de nombreux
 widgets et des fenêtres empilables.
+
+%description -l pl devel
+Pliki nag³ówkowe dla newt.
 
 %description -l tr devel
 Bu paket, newt ile geliþtirme yapmak için gereken baþlýk dosyalarýný ve
@@ -106,7 +112,7 @@ Group(pl):	Programowanie/Jêzyki/Tcl
 Requires:	%{name} = %{version}
 
 %description tcl
-Newt Tcl bindings
+Newt Tcl bindings.
 
 %description -l pl tcl 
 Dodatki do Tcl z Newt'a
@@ -124,13 +130,16 @@ Provides:	snack
 Newt python bindings
 
 %description python -l pl
-Dodatki do python'a z Newt'a
+Dodatki do python'a z Newt'a.
 
 %prep
 %setup -q
 
 %build
-./configure %{_target_platform} \
+LDFLAGS="-s"
+CFLAGS="$RPM_OPT_FLAGS"
+export LDFLAGS CFLAGS
+%configure \
 	--enable-gpm-support
 make PROGS="whiptail whiptcl.so testgrid"
 make shared 
@@ -142,9 +151,13 @@ install -d $RPM_BUILD_ROOT
 make instroot=$RPM_BUILD_ROOT install
 make instroot=$RPM_BUILD_ROOT install-sh
 
-strip $RPM_BUILD_ROOT%{_bindir}/*
+#strip $RPM_BUILD_ROOT%{_bindir}/*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
+	$RPM_BUILD_ROOT%{_libdir}/python1.5/lib-dynload/*.so
 
-gzip -9nf CHANGES tutorial.sgml
+sgml2txt tutorial.sgml
+
+gzip -9nf CHANGES tutorial.txt
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -154,9 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.gz
-
-%attr(755,root,root) %{_libdir}/*.so.*
+%attr(755,root,root) %{_libdir}/*.so.*.*
 %attr(755,root,root) %{_bindir}/whiptail
 
 %files tcl 
@@ -169,7 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/python1.5/lib-dynload/*.so
 
 %files devel
-%doc tutorial.sgml.gz
+%doc CHANGES.gz tutorial.txt.gz
 
 %attr(644,root,root) %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
