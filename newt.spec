@@ -4,21 +4,20 @@ Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.50
-Release:	17
+Version:	0.50.18
+Release:	2
 License:	LGPL
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
-Patch0:		newt-pythondirs.patch
+Patch0:		%{name}-pythondirs.patch
 BuildRequires:	slang-devel
-BuildRequires:	tcl-devel
-BuildRequires:	python-devel >= 1.6b1
+BuildRequires:	tcl-devel >= 8.3.2
+BuildRequires:	python-devel >= 2.0
 BuildRequires:	popt-devel
 BuildRequires:	sgml-tools
-Provides:	dialog
-Obsoletes:	dialog
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,14 +36,14 @@ Applikationen leicht mit stapelbaren Fenstern, Schaltflächen,
 Optionskästchen, Listen, Eingabefeldern, Etiketten und Display-Text
 arbeiten können. Auch Bildlaufleisten erden unterstützt, und der
 Einbau von Formularen ist möglich, wenn zusätzliche Funktionalität
-gefordert ist. 
+gefordert ist.
 
 %description -l fr
 Newt est une boite à outil de fenétrage en mode texte, construit sur
 la librarie slang. Elle permet aux applications en mode texte
 d'utiliser simplement de multiples fenêtres, des bouttons, des cases à
 cocher... Les barres de défilement sont supportées, et les fenêtres
-peuvent être imbriquées pour donner des fonctionnalités nouvelles. 
+peuvent être imbriquées pour donner des fonctionnalités nouvelles.
 
 %description -l pl
 Newt jest bibliotek± typu toolkit ale to trybu tekstowego osadzon± na
@@ -55,7 +54,7 @@ potrzebne przy tworzeniu interfejsu u¿ytkownika w ró¿nych aplikacjach.
 
 %description -l tr
 Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma
-çubuklarý, çeþitli tuþlar oluþturulabilir. 
+çubuklarý, çeþitli tuþlar oluþturulabilir.
 
 %package devel
 Summary:	Developer's toolkit for newt windowing library
@@ -64,6 +63,7 @@ Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(pl):	Pliki nag³ówkowe dla newt
 Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -95,6 +95,7 @@ kitaplýðýdýr.
 Summary:	Newt static library
 Summary(pl):	Biblioteka statyczna newt
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -109,6 +110,7 @@ Biblioteka statyczna newt.
 Summary:	Newt Tcl bindings
 Summary(pl):	Dodatki do Tcl z Newt'a
 Group:		Development/Languages/Tcl
+Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/Jêzyki/Tcl
 Requires:	%{name} = %{version}
 
@@ -122,6 +124,7 @@ Dodatki do Tcl z Newt'a
 Summary:	Newt python bindings
 Summary(pl):	Dodatki do python'a z Newt'a
 Group:		Development/Languages/Python
+Group(de):	Entwicklung/Sprachen/Python
 Group(pl):	Programowanie/Jêzyki/Python
 Requires:	%{name} = %{version}
 Requires:	python >= 1.5
@@ -135,23 +138,21 @@ Dodatki do python'a z Newt'a.
 
 %package -n whiptail
 Summary:	A dialog compliant program to build tty dialog boxes
-Group:          Utilities/Terminal
-Group(pl):      Narzêdzia/Terminal
+Group:		Applications/Terminal
+Group(de):	Applikationen/Terminal
+Group(pl):	Aplikacje/Terminal
 
 %description -n whiptail
-Dialog compliant utility that allows you to build user interfaces in a TTY 
-(text mode only). You can call dialog from within a shell script to
-ask the user questions or present with choices in a more user friendly
-manner.
+Dialog compliant utility that allows you to build user interfaces in a
+TTY (text mode only). You can call dialog from within a shell script
+to ask the user questions or present with choices in a more user
+friendly manner.
 
 %prep
 %setup -q
 %patch0 -p1 
 
 %build
-LDFLAGS="-s"
-CFLAGS="$RPM_OPT_FLAGS"
-export LDFLAGS CFLAGS
 %configure \
 	--enable-gpm-support
 %{__make} PROGS="whiptail whiptcl.so testgrid" 
@@ -163,8 +164,6 @@ install -d $RPM_BUILD_ROOT
 
 %{__make} instroot=$RPM_BUILD_ROOT install 
 %{__make} instroot=$RPM_BUILD_ROOT install-sh 
-
-ln -sf whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
 sgml2txt tutorial.sgml
 
@@ -181,8 +180,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.so.*.*
 
 %files -n whiptail
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/whiptail
-%attr(755,root,root) %{_bindir}/dialog
 
 %files tcl 
 %defattr(644,root,root,755)
