@@ -22,6 +22,7 @@ BuildRequires:	python-devel >= 2.2
 BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel >= 8.3.2
+BuildRequires:	docbook-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
