@@ -130,7 +130,7 @@ Dodatki do python'a z Newt'a
 %setup -q
 
 %build
-./configure %{_target} \
+./configure %{_target_platform} \
 	--enable-gpm-support
 make PROGS="whiptail whiptcl.so testgrid"
 make shared 
