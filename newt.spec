@@ -202,7 +202,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc CHANGES  
+%doc CHANGES
 #tutorial.txt
 
 %{_includedir}/*.h
