@@ -130,7 +130,7 @@ Dodatki do python'a z Newt'a
 %setup -q
 
 %build
-./configure \
+./configure %{_target} \
 	--enable-gpm-support
 make PROGS="whiptail whiptcl.so testgrid"
 make shared 
@@ -157,7 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES.gz
 
 %attr(755,root,root) /usr/lib/*.so.*
-%attr(711,root,root) /usr/bin/whiptail
+%attr(755,root,root) /usr/bin/whiptail
 
 %files tcl 
 %defattr(644,root,root,755)
