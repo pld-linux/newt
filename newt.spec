@@ -21,6 +21,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 2.2
+BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel >= 8.3.2
