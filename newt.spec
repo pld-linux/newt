@@ -12,6 +12,7 @@ Group(pl):   	Biblioteki
 Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 BuildPrereq:	slang-devel
 BuildPrereq:	tcl-devel
+BuildPrereq:	popt-devel
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
@@ -116,6 +117,7 @@ Summary(pl):	Dodatki do python'a z Newt'a
 Group:		Development/Languages/Python
 Group(pl):	Programowanie/Jêzyki/Python
 Requires:	%{name} = %{version}
+Requires:	python >= 1.5
 Provides:	snack
 
 %description python
