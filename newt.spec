@@ -15,6 +15,7 @@ Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
 Patch3:		%{name}-gpm-fix.diff
+Patch4:		%{name}-omg_fix.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -156,6 +157,7 @@ przyjazny.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4
 
 %build
 %{__aclocal}
