@@ -21,7 +21,7 @@ allows color text mode applications to easily use stackable windows, push
 buttons, check boxes, radio buttons, lists, entry fields, labels, and
 displayable text. Scrollbars are supported, and forms may be nested to
 provide extra functionality. This pacakge contains the shared library for
-programs that have been built with newt as well as a /usr/bin/dialog
+programs that have been built with newt as well as a %{_bindir}/dialog
 replacement called whiptail.
 
 %description -l pl
@@ -36,7 +36,7 @@ Eingabefeldern, Etiketten und Display-Text arbeiten können. Auch
 Bildlaufleisten erden unterstützt, und der Einbau von Formularen ist
 möglich, wenn zusätzliche Funktionalität gefordert ist. Dieses Paket enthält
 die gemeinsam nutzbare Library für mit Newt gebaute Programme sowie einen
-/usr/bin/dialog namens whiptail.
+%{_bindir}/dialog namens whiptail.
 
 %description -l fr
 Newt est une boite à outil de fenétrage en mode texte, construit sur la
@@ -45,7 +45,7 @@ simplement de multiples fenêtres, des bouttons, des cases à cocher... Les
 barres de défilement sont supportées, et les fenêtres peuvent être
 imbriquées pour donner des fonctionnalités nouvelles. Ce package contient
 les librairies partagées pour les programmes construits avec newt comme un
-remplaçant pour /usr/bin/dialog appelé whiptail.
+remplaçant pour %{_bindir}/dialog appelé whiptail.
 
 %description -l tr
 Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma çubuklarý,
@@ -142,7 +142,7 @@ install -d $RPM_BUILD_ROOT
 make instroot=$RPM_BUILD_ROOT install
 make instroot=$RPM_BUILD_ROOT install-sh
 
-strip $RPM_BUILD_ROOT/usr/bin/*
+strip $RPM_BUILD_ROOT%{_bindir}/*
 
 gzip -9nf CHANGES tutorial.sgml
 
@@ -157,7 +157,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES.gz
 
 %attr(755,root,root) %{_libdir}/*.so.*
-%attr(755,root,root) /usr/bin/whiptail
+%attr(755,root,root) %{_bindir}/whiptail
 
 %files tcl 
 %defattr(644,root,root,755)
