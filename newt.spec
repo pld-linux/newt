@@ -23,6 +23,7 @@ Patch4:		%{name}-omg_fix.patch
 Patch5:		%{name}-PIC.patch
 Patch6:		%{name}-norm.patch
 Patch7:		%{name}-c_only.patch
+Patch8:		%{name}-gcc34.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -169,6 +170,7 @@ przyjazny.
 %if %{with c_only}
 %patch7 -p1
 %endif
+%patch8 -p1
 
 %build
 %{__aclocal}
