@@ -17,7 +17,7 @@ BuildRequires:	popt-devel
 BuildRequires:	sgml-tools
 Provides:	dialog
 Obsoletes:	dialog
-Buildroot:   	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Newt is a windowing toolkit for text mode built from the slang library. It
