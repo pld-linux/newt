@@ -1,0 +1,12 @@
+--- newt-0.50.34/Makefile.in.orig	Mon Mar  8 13:04:27 2004
++++ newt-0.50.34/Makefile.in	Mon Mar  8 13:07:14 2004
+@@ -76,7 +76,8 @@
+ whiptcl.so: $(WHIPTCLOBJS) $(LIBNEWTSH)
+ 	gcc -shared $(SHCFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . $(LIBNEWTSH) -ltcl -lslang -lpopt -lm
+ 
+-$(LIBNEWT): $(LIBNEWT)($(LIBOBJS))
++$(LIBNEWT): $(LIBOBJS)
++	ar rv $(LIBNEWT) $(LIBOBJS)
+ 
+ newt.o: newt.c Makefile
+ 	$(CC) $(CFLAGS) -DVERSION=\"$(VERSION)\" -c -o $@ $<
