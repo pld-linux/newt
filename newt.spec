@@ -5,7 +5,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50
-Release:	16
+Release:	17
 License:	LGPL
 Group:		Libraries
 Group(fr):	Librairies
@@ -146,7 +146,7 @@ manner.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0 -p1 -b .wiget
 
 %build
 LDFLAGS="-s"
@@ -154,14 +154,8 @@ CFLAGS="$RPM_OPT_FLAGS"
 export LDFLAGS CFLAGS
 %configure \
 	--enable-gpm-support
-%{__make} PROGS="whiptail whiptcl.so testgrid" \
-	pythondir="\$(prefix)/lib/python1.6" \
-	pythonbindir="\$(prefix)/lib/python1.6/lib-dynload" \
-	pythonincludedir="\$(prefix)/include/python1.6"
-%{__make} shared \
-	pythondir="\$(prefix)/lib/python1.6" \
-	pythonbindir="\$(prefix)/lib/python1.6/lib-dynload" \
-	pythonincludedir="\$(prefix)/include/python1.6"
+%{__make} PROGS="whiptail whiptcl.so testgrid" 
+%{__make} shared 
 
 %install
 rm -rf $RPM_BUILD_ROOT
