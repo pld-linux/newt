@@ -1,0 +1,19 @@
+--- newt-0.50/Makefile.in~	Mon Aug  2 17:37:34 1999
++++ newt-0.50/Makefile.in	Fri Aug 25 15:21:00 2000
+@@ -32,6 +32,7 @@
+ ARCHNAME = $(shell uname -m | sed 's/i.86/i386/')
+ pythondir = $(prefix)/lib/python1.5
+ pythonbindir = $(prefix)/lib/python1.5/lib-dynload
++pythonincludedir = $(prefix)/include/python1.5
+ 
+ #--------------------------------------
+ 
+@@ -61,7 +62,7 @@
+ 	gcc --shared -o _snackmodule.so snackmodule.o -L . $(LIBNEWTSH)
+ 
+ snackmodule.o:   snackmodule.c
+-	gcc -I/usr/include/python1.5 -fPIC $(CFLAGS) -c snackmodule.c
++	gcc -I$(pythonincludedir) -fPIC $(CFLAGS) -c snackmodule.c
+ 
+ whiptail: $(NDIALOGOBJS) $(LIBNEWTSH)
+ 	gcc -g -o whiptail $(NDIALOGOBJS) -L . $(LIBNEWTSH) $(LIBS) -lpopt
