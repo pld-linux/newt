@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_with	c_only	# build only C libraries
 #
-%include	/usr/lib/rpm/macros.python
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
 Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
