@@ -3,7 +3,7 @@ Summary(de): Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
 Summary(fr): Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(tr): Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        newt
-Version:     0.25
+Version:     0.30
 Release:     3
 Copyright:   LGPL
 Group:       Libraries
@@ -119,12 +119,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Thu Sep  3 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.25-3]
+  [0.30-3]
 - added -q %setup parameter,
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
 - added static subpackage,
-- recompiled against slang 1.2.x
+- recompiled against slang 1.2.x,
 - added striping shared libraries,
 - added %attr and %defattr macros in %files (allow build package from
   non-root account).
