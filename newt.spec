@@ -158,7 +158,7 @@ przyjazny.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--enable-gpm-support
 %{__make} PROGS="whiptail whiptcl.so testgrid"
