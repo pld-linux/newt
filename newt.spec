@@ -9,8 +9,12 @@ Release:	2
 License:	LGPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pythondirs.patch
 BuildRequires:	slang-devel
@@ -46,7 +50,7 @@ cocher... Les barres de dÈfilement sont supportÈes, et les fenÍtres
 peuvent Ítre imbriquÈes pour donner des fonctionnalitÈs nouvelles.
 
 %description -l pl
-Newt jest bibliotek± typu toolkit ale to trybu tekstowego osadzon± na
+Newt jest bibliotek± typu toolkit ale do trybu tekstowego, osadzon± na
 bibliotece slang. Umoøliwia budowanie aplikacji pracuj±cych w trybie
 tekstowym umoøliwij±c operowanie na okienkach, przyciskach (push
 button), listach wyboru, etykietach i elementach tekstowych jakie s±
@@ -64,8 +68,12 @@ Summary(pl):	Pliki nag≥Ûwkowe dla newt
 Summary(tr):	newt pencere kitapl˝˝ iÁin geli˛tirme dosyalar˝
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}
 
 %description devel
@@ -96,8 +104,12 @@ Summary:	Newt static library
 Summary(pl):	Biblioteka statyczna newt
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -108,7 +120,7 @@ Biblioteka statyczna newt.
 
 %package tcl
 Summary:	Newt Tcl bindings
-Summary(pl):	Dodatki do Tcl z Newt'a
+Summary(pl):	Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
 Group(de):	Entwicklung/Sprachen/Tcl
 Group(pl):	Programowanie/JÍzyki/Tcl
@@ -118,11 +130,11 @@ Requires:	%{name} = %{version}
 Newt Tcl bindings.
 
 %description -l pl tcl 
-Dodatki do Tcl z Newt'a
+Dodatki do Tcl z Newta
 
 %package python
 Summary:	Newt python bindings
-Summary(pl):	Dodatki do python'a z Newt'a
+Summary(pl):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
 Group(de):	Entwicklung/Sprachen/Python
 Group(pl):	Programowanie/JÍzyki/Python
@@ -134,10 +146,11 @@ Provides:	snack
 Newt python bindings
 
 %description python -l pl
-Dodatki do python'a z Newt'a.
+Dodatki do pythona z Newta.
 
 %package -n whiptail
 Summary:	A dialog compliant program to build tty dialog boxes
+Summary(pl):	Program do tekstowych okienek dialogowych kompatybilny z dialog
 Group:		Applications/Terminal
 Group(de):	Applikationen/Terminal
 Group(pl):	Aplikacje/Terminal
@@ -147,6 +160,12 @@ Dialog compliant utility that allows you to build user interfaces in a
 TTY (text mode only). You can call dialog from within a shell script
 to ask the user questions or present with choices in a more user
 friendly manner.
+
+%description -n whiptail -l pl
+Program umoøliwi±cy budowaÊ interfejsy uøytkownika na terminalu
+tekstowym, kompatybilny z programem dialog. Pozwala wywo≥aÊ dialog ze
+skryptu shella, aby zdaÊ pytania uøytkownikowi w sposÛb bardziej
+przyjazny.
 
 %prep
 %setup -q
@@ -171,11 +190,11 @@ sgml2txt tutorial.sgml
 
 gzip -9nf CHANGES tutorial.txt
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
