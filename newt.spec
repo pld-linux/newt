@@ -6,10 +6,11 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50.34
-Release:	5
+Release:	6
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
+# Source0-md5:	e4b4a030cd8d7ee1a4d83ad73dfbb1bb
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
@@ -21,7 +22,7 @@ BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 2.2
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel
-BuildRequires:	tcl-devel >= 8.3.2
+BuildRequires:	tcl-devel >= 8.3.4-10
 BuildRequires:	docbook-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -175,8 +176,6 @@ install -d $RPM_BUILD_ROOT
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
 
-gzip -9nf CHANGES tutorial.*
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -202,7 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc CHANGES.gz tutorial.txt.gz
+%doc CHANGES tutorial.txt
 
 %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
