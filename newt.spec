@@ -19,7 +19,8 @@ Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
 Patch3:		%{name}-gpm-fix.diff
 Patch4:		%{name}-omg_fix.patch
-Patch5:		%{name}-c_only.patch
+Patch5:		%{name}-PIC.patch
+Patch6:		%{name}-c_only.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -162,8 +163,9 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p0
-%if %{with c_only}
 %patch5 -p1
+%if %{with c_only}
+%patch6 -p1
 %endif
 
 %build
