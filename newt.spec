@@ -171,9 +171,15 @@ install -d $RPM_BUILD_ROOT
 %{__make} instroot=$RPM_BUILD_ROOT install
 %{__make} instroot=$RPM_BUILD_ROOT install-sh
 
+
+#it just plain doesn't work... fix it if you can
+%ifnarch ppc
 sgml2txt tutorial.sgml
 
 gzip -9nf CHANGES tutorial.txt
+%else
+gzip -9nf CHANGES
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
