@@ -13,7 +13,7 @@ Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 BuildPrereq:	slang-devel
 BuildPrereq:	tcl-devel
 BuildPrereq:	popt-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
 Newt is a windowing toolkit for text mode built from the slang library. It
@@ -178,82 +178,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %{_libdir}/*.a
 
 %changelog
-* Wed Apr 21 1999 Artur Frysiak <wiget@pld.org.pl>
-  [0.30-6]
-- added tcl and python subpackage
-- recompiled on rpm 3
-
-* Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
-  [0.30-4]
-- added Group(pl)
-- added missing tutorial
-- added gzipping documentation
-- cosmetic changes
-
-* Mon Oct 05 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-[0.30-3d]
-- build against PLD Tornado,
-- translation modified for pl,
-- fixed files permissions.
-- changed %defattr(755,root,root) to %defattr(644,root,root,755),
-- minor modifications of the spec file.
-
-* Thu Sep  3 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-[0.30-3]
-- added -q %setup parameter,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added using %%{name} and %%{version} in Source,
-- added static subpackage,
-- recompiled against slang 1.2.x,
-- added striping shared libraries,
-- added %attr and %defattr macros in %files (allow build package from
-  non-root account).
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Fri May 01 1998 Cristian Gafton <gafton@redhat.com>
-- devel package moved to Development/Libraries
-
-* Thu Apr 30 1998 Erik Troan <ewt@redhat.com>
-- removed whiptcl.so -- it should be in a separate package
-
-* Mon Feb 16 1998 Erik Troan <ewt@redhat.com>
-- added newtWinMenu()
-- many bug fixes in grid code
-
-* Wed Jan 21 1998 Erik Troan <ewt@redhat.com>
-- removed newtWinTernary()
-- made newtWinChoice() return codes consistent with newtWinTernary()
-
-* Fri Jan 16 1998 Erik Troan <ewt@redhat.com>
-- added changes from Bruce Perens
-    - small cleanups
-    - lets whiptail automatically resize windows
-- the order of placing a grid and adding components to a form no longer
-  matters
-- added newtGridAddComponentsToForm()
-
-* Wed Oct 08 1997 Erik Troan <ewt@redhat.com>
-- added newtWinTernary()
-
-* Tue Oct 07 1997 Erik Troan <ewt@redhat.com>
-- made Make/spec files use a buildroot
-- added grid support (for newt 0.11 actually)
-
-* Mon Jun 02 1997 Erik Troan <ewt@redhat.com>
-- Added patched from Clarence Smith for setting the size of a listbox
-- Version 0.9
-
-* Tue May 28 1997 Elliot Lee <sopwith@redhat.com> 0.8-2
-- Touchups on Makefile
-- Cleaned up NEWT_FLAGS_*
-
-* Tue Mar 18 1997 Erik Troan <ewt@redhat.com>
-- Cleaned up listbox
-- Added whiptail
-- Added newtButtonCompact button type and associated colors
-- Added newtTextboxGetNumLines() and newtTextboxSetHeight()
-
-* Tue Feb 25 1997 Erik Troan <ewt@redhat.com>
-- Added changes from sopwith for C++ cleanliness and some listbox fixes.
+* Mon May 31 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.40-9]
+- based on RH spec,
+- spec rewrited by PLD team,
+- pl translation by Wojtek ¦lusarczyk <wojtek@shadow.eu.org>.
