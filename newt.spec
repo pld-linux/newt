@@ -17,6 +17,8 @@ Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pythondirs.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel >= 8.3.2
 BuildRequires:	python-devel >= 2.0
