@@ -1,14 +1,19 @@
---- newt-0.50/Makefile.in~	Mon Aug  2 17:37:34 1999
-+++ newt-0.50/Makefile.in	Fri Aug 25 15:21:00 2000
-@@ -32,6 +32,7 @@
+--- newt-0.50/Makefile.in.wiget	Mon Aug  2 17:37:34 1999
++++ newt-0.50/Makefile.in	Tue Oct  3 17:14:07 2000
+@@ -30,8 +30,10 @@
+ libdir = $(prefix)/lib
+ bindir = $(prefix)/bin
  ARCHNAME = $(shell uname -m | sed 's/i.86/i386/')
- pythondir = $(prefix)/lib/python1.5
- pythonbindir = $(prefix)/lib/python1.5/lib-dynload
-+pythonincludedir = $(prefix)/include/python1.5
+-pythondir = $(prefix)/lib/python1.5
+-pythonbindir = $(prefix)/lib/python1.5/lib-dynload
++pythondir = $(shell python -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('DESTLIB');")
++pythonbindir = $(shell python -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('DESTSHARED');")
++pythonincludedir = $(shell python -c 'from distutils.sysconfig import get_python_inc; print get_python_inc();')
++  
  
  #--------------------------------------
  
-@@ -61,7 +62,7 @@
+@@ -61,7 +63,7 @@
  	gcc --shared -o _snackmodule.so snackmodule.o -L . $(LIBNEWTSH)
  
  snackmodule.o:   snackmodule.c
