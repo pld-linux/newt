@@ -6,11 +6,11 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.50.34
-Release:	6
+Release:	7
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
-# Source0-md5: e4b4a030cd8d7ee1a4d83ad73dfbb1bb
+# Source0-md5:	e4b4a030cd8d7ee1a4d83ad73dfbb1bb
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
@@ -157,7 +157,7 @@ przyjazny.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4
+%patch4 -p0
 
 %build
 %{__aclocal}
@@ -204,7 +204,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES
 #tutorial.txt
-
 %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
 
