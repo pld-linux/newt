@@ -12,6 +12,7 @@ Group(pl):   	Biblioteki
 Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
 BuildRequires:	slang-devel
 BuildRequires:	tcl-devel
+BuildRequires:	python-devel
 BuildRequires:	popt-devel
 BuildRequires:	sgml-tools
 Buildroot:   	/tmp/%{name}-%{version}-root
