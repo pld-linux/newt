@@ -176,10 +176,3 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %attr(644,root,root) %{_libdir}/*.a
-
-%changelog
-* Mon May 31 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.40-9]
-- based on RH spec,
-- spec rewrited by PLD team,
-- pl translation by Wojtek ¦lusarczyk <wojtek@shadow.eu.org>.
