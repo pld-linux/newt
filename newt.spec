@@ -171,11 +171,8 @@ install -d $RPM_BUILD_ROOT
 %{__make} instroot=$RPM_BUILD_ROOT install
 %{__make} instroot=$RPM_BUILD_ROOT install-sh
 
-
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
-
-gzip -9nf CHANGES tutorial.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -202,7 +199,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc CHANGES.gz tutorial.txt.gz
+%doc CHANGES  
+#tutorial.txt
 
 %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
