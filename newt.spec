@@ -5,7 +5,7 @@ Summary(pl): 	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr): 	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:        	newt
 Version:     	0.50
-Release:     	13
+Release:     	14
 Copyright:   	LGPL
 Group:       	Libraries
 Group(pl):   	Biblioteki
@@ -15,6 +15,8 @@ BuildRequires:	tcl-devel
 BuildRequires:	python-devel
 BuildRequires:	popt-devel
 BuildRequires:	sgml-tools
+Provides:	dialog
+Obsoletes:	dialog
 Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
@@ -152,6 +154,8 @@ install -d $RPM_BUILD_ROOT
 make instroot=$RPM_BUILD_ROOT install
 make instroot=$RPM_BUILD_ROOT install-sh
 
+ln -s ./whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
+
 #strip $RPM_BUILD_ROOT%{_bindir}/*
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
 	$RPM_BUILD_ROOT%{_libdir}/python1.5/lib-dynload/*.so
@@ -170,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so.*.*
 %attr(755,root,root) %{_bindir}/whiptail
+%attr(755,root,root) %{_bindir}/dialog
 
 %files tcl 
 %defattr(644,root,root,755)
