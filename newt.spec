@@ -62,7 +62,7 @@ peuvent être imbriquées pour donner des fonctionnalités nouvelles.
 %description -l pl
 Newt jest bibliotek± typu toolkit ale do trybu tekstowego, osadzon± na
 bibliotece slang. Umo¿liwia budowanie aplikacji pracuj±cych w trybie
-tekstowym umo¿liwij±c operowanie na okienkach, przyciskach (push
+tekstowym umo¿liwiaj±c operowanie na okienkach, przyciskach (push
 button), listach wyboru, etykietach i elementach tekstowych jakie s±
 potrzebne przy tworzeniu interfejsu u¿ytkownika w ró¿nych aplikacjach.
 
@@ -124,7 +124,7 @@ Requires:	%{name} = %{version}-%{release}
 Newt Tcl bindings.
 
 %description tcl -l pl
-Dodatki do Tcl z Newta
+Dodatki do Tcl z Newta.
 
 %package python
 Summary:	Newt python bindings
@@ -152,7 +152,7 @@ to ask the user questions or present with choices in a more user
 friendly manner.
 
 %description -n whiptail -l pl
-Program umo¿liwi±cy budowaæ interfejsy u¿ytkownika na terminalu
+Program umo¿liwiaj±cy budowaæ interfejsy u¿ytkownika na terminalu
 tekstowym, kompatybilny z programem dialog. Pozwala wywo³aæ dialog ze
 skryptu shella, aby zdaæ pytania u¿ytkownikowi w sposób bardziej
 przyjazny.
