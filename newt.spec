@@ -1,18 +1,18 @@
-Summary:     Not Erik's Windowing Toolkit - text mode windowing with slang
-Summary(de): Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang 
-Summary(fr): Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
-Summary(pl): Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
-Summary(tr): Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
-Name:        newt
-Version:     0.30
-Release:     4
-Copyright:   LGPL
-Group:       Libraries
-Group(pl):   Biblioteki
-Source:      ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
-Requires:    slang
-Provides:    snack
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:     	Not Erik's Windowing Toolkit - text mode windowing with slang
+Summary(de): 	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang 
+Summary(fr): 	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
+Summary(pl): 	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
+Summary(tr): 	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
+Name:        	newt
+Version:     	0.30
+Release:     	6
+Copyright:   	LGPL
+Group:       	Libraries
+Group(pl):   	Biblioteki
+Source:      	ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz
+BuildPrereq:	slang-devel
+BuildPrereq:	tcl-devel
+Buildroot:   	/tmp/%{name}-%{version}-root
 
 %description
 Newt is a windowing toolkit for text mode built from the slang library. It
@@ -53,14 +53,14 @@ duyacaðý kitaplýðý ve whiptail isimli geliþmiþ bir dialog sürümü
 içermektedir.
 
 %package devel
-Summary:     Developer's toolkit for newt windowing library
-Summary(de): Entwickler-Toolkit für die newt-Windowing-Library 
-Summary(pl): Pliki nag³ówkowe dla newt
-Summary(fr): Toolkit de développement pour la bibliothèque de fenêtrage newt
-Summary(tr): newt pencere kitaplýðý için geliþtirme dosyalarý
-Group:       Development/Libraries
-Group(pl):   Programowanie/Biblioteki
-Requires:    %{name} = %{version}
+Summary:     	Developer's toolkit for newt windowing library
+Summary(de): 	Entwickler-Toolkit für die newt-Windowing-Library 
+Summary(pl): 	Pliki nag³ówkowe dla newt
+Summary(fr): 	Toolkit de développement pour la bibliothèque de fenêtrage newt
+Summary(tr): 	newt pencere kitaplýðý için geliþtirme dosyalarý
+Group:       	Development/Libraries
+Group(pl):   	Programowanie/Biblioteki
+Requires:    	%{name} = %{version}
 
 %description devel
 These are the header files and libraries for developing applications which
@@ -85,17 +85,44 @@ Bu paket, newt ile geliþtirme yapmak için gereken baþlýk dosyalarýný ve
 kitaplýklarý içerir. Newt, metin ekranda çalýþan bir pencereleme kitaplýðýdýr.
 
 %package static
-Summary:     Newt static library
-Summary(pl): Biblioteka statyczna newt
-Group:       Development/Libraries
-Group(pl):   Programowanie/Biblioteki
-Requires:    %{name}-devel = %{version}
+Summary:     	Newt static library
+Summary(pl): 	Biblioteka statyczna newt
+Group:       	Development/Libraries
+Group(pl):   	Programowanie/Biblioteki
+Requires:    	%{name}-devel = %{version}
 
 %description static
 Newt static library.
 
 %description -l pl static
 Biblioteka statyczna newt.
+
+%package tcl
+Summary:	Newt Tcl bindings
+Summary(pl):	Dodatki do Tcl z Newt'a
+Group:		Development/Languages/Tcl
+Group(pl):	Programowanie/Jêzyki/Tcl
+Requires:	%{name} = %{version}
+
+%description tcl
+Newt Tcl bindings
+
+%description -l pl tcl 
+Dodatki do Tcl z Newt'a
+
+%package python
+Summary:	Newt python bindings
+Summary(pl):	Dodatki do python'a z Newt'a
+Group:		Development/Languages/Python
+Group(pl):	Programowanie/Jêzyki/Python
+Requires:	%{name} = %{version}
+Provides:	snack
+
+%description python
+Newt python bindings
+
+%description python -l pl
+Dodatki do python'a z Newt'a
 
 %prep
 %setup -q
@@ -127,8 +154,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/lib/*.so.*
 %attr(711,root,root) /usr/bin/whiptail
+
+%files tcl 
+%defattr(644,root,root,755)
 %attr(755,root,root) /usr/lib/*tcl.so
-%attr(644,root,root) /usr/lib/python1.5/*.py
+
+%files python
+%defattr(644,root,root,755)
+/usr/lib/python1.5/*.py
 %attr(755,root,root) /usr/lib/python1.5/lib-dynload/*.so
 
 %files devel
