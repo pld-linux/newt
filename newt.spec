@@ -15,8 +15,9 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
-Source0:	ftp://ftp.redhat.com/pub/redhat/code/newt/%{name}-%{version}.tar.gz
+Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pythondirs.patch
+URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	slang-devel
