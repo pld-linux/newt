@@ -180,10 +180,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/python1.5/lib-dynload/*.so
 
 %files devel
+%defattr(644,root,root,755)
 %doc CHANGES.gz tutorial.txt.gz
 
-%attr(644,root,root) %{_includedir}/*.h
+%{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/lib*.so
 
 %files static
-%attr(644,root,root) %{_libdir}/*.a
+%defattr(644,root,root,755)
+%{_libdir}/*.a
