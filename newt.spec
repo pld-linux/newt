@@ -148,15 +148,15 @@ CFLAGS="$RPM_OPT_FLAGS"
 export LDFLAGS CFLAGS
 %configure \
 	--enable-gpm-support
-make PROGS="whiptail whiptcl.so testgrid"
-make shared 
+%{__make} PROGS="whiptail whiptcl.so testgrid"
+%{__make} shared 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT
 
-make instroot=$RPM_BUILD_ROOT install
-make instroot=$RPM_BUILD_ROOT install-sh
+%{__make} instroot=$RPM_BUILD_ROOT install
+%{__make} instroot=$RPM_BUILD_ROOT install-sh
 
 ln -s ./whiptail $RPM_BUILD_ROOT%{_bindir}/dialog
 
