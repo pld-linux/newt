@@ -9,14 +9,6 @@ Version:	0.50.34
 Release:	3
 License:	LGPL
 Group:		Libraries
-Group(de):	Bibliotheken
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt):	Bibliotecas
-Group(pt_BR):	Bibliotecas
-Group(ru):	âÉÂÌÉÏÔÅËÉ
-Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
@@ -75,14 +67,6 @@ Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
 Summary(pl):	Pliki nag³ówkowe dla newt
 Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
 Group:		Development/Libraries
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 
 %description devel
@@ -112,14 +96,6 @@ kitaplýðýdýr.
 Summary:	Newt static library
 Summary(pl):	Biblioteka statyczna newt
 Group:		Development/Libraries
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -132,11 +108,6 @@ Biblioteka statyczna newt.
 Summary:	Newt Tcl bindings
 Summary(pl):	Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
-Group(de):	Entwicklung/Sprachen/Tcl
-Group(es):	Desarrollo/Lenguages/Tcl
-Group(fr):	Development/Langues/Tcl
-Group(pl):	Programowanie/Jêzyki/Tcl
-Group(pt):	Desenvolvimento/Línguas/Tcl
 Requires:	%{name} = %{version}
 
 %description tcl
@@ -149,11 +120,6 @@ Dodatki do Tcl z Newta
 Summary:	Newt python bindings
 Summary(pl):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
-Group(de):	Entwicklung/Sprachen/Python
-Group(es):	Desarrollo/Lenguages/Python
-Group(fr):	Development/Langues/Python
-Group(pl):	Programowanie/Jêzyki/Python
-Group(pt):	Desenvolvimento/Línguas/Python
 Requires:	%{name} = %{version}
 Requires:	python >= 1.5
 Provides:	snack
@@ -169,11 +135,6 @@ Dodatki do pythona z Newta.
 Summary:	A dialog compliant program to build tty dialog boxes
 Summary(pl):	Program do tekstowych okienek dialogowych kompatybilny z dialog
 Group:		Applications/Terminal
-Group(de):	Applikationen/Terminal
-Group(es):	Aplicaciones/Terminal
-Group(fr):	Aplicaciones/Terminal
-Group(pl):	Aplikacje/Terminal
-Group(pt):	Aplicações/Terminal
 
 %description -n whiptail
 Dialog compliant utility that allows you to build user interfaces in a
