@@ -174,6 +174,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) /usr/lib/*.a
 
 %changelog
+* Wed Apr 21 1999 Artur Frysiak <wiget@pld.org.pl>
+  [0.30-6]
+- added tcl and python subpackage
+- recompiled on rpm 3
+
 * Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
   [0.30-4]
 - added Group(pl)
