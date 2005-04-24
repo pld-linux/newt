@@ -8,16 +8,16 @@ Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.50.34
-Release:	10
+Version:	0.51.6
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
-# Source0-md5:	e4b4a030cd8d7ee1a4d83ad73dfbb1bb
+# Source0-md5:	76ebfb749d3bbe9a0d55915faef4ac5e
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
 Patch2:		%{name}-install_sh.patch
-Patch3:		%{name}-gpm-fix.diff
+Patch3:		%{name}-0.51.6-if1close.patch
 Patch4:		%{name}-omg_fix.patch
 Patch5:		%{name}-PIC.patch
 Patch6:		%{name}-norm.patch
@@ -159,17 +159,17 @@ przyjazny.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%%patch0 -p1
+#%%patch1 -p1
+#%%patch2 -p1
 %patch3 -p1
-%patch4 -p0
-%patch5 -p1
-%patch6 -p1
+#%%patch4 -p0
+#%%patch5 -p1
+#%%patch6 -p1
 %if %{with c_only}
 %patch7 -p1
 %endif
-%patch8 -p1
+#%%patch8 -p1
 
 %build
 %{__aclocal}
@@ -207,9 +207,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/whiptail
 
 %if ! %{with c_only}
-%files tcl
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*tcl.so
+#%%files tcl
+#%%defattr(644,root,root,755)
+#%%attr(755,root,root) %{_libdir}/*tcl.so
 
 %files python
 %defattr(644,root,root,755)
