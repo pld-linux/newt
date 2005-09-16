@@ -30,7 +30,7 @@ BuildRequires:	automake
 BuildRequires:	popt-devel
 %{?!with_c_only:BuildRequires:	python-devel >= 2.2}
 #BuildRequires:	sgml-tools
-BuildRequires:	slang-devel
+BuildRequires:	slang-devel >= 2.0.0
 %{?!with_c_only:BuildRequires:	tcl-devel >= 8.3.2}
 BuildRequires:	docbook-utils
 BuildRequires:	rpm-pythonprov
