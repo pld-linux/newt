@@ -12,7 +12,8 @@ Version:	0.51.6
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	ftp://www.msg.com.mx/pub/Newt/%{name}-%{version}.tar.gz
+# http://download.fedora.redhat.com/pub/fedora/linux/core/development/SRPMS/
+Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	76ebfb749d3bbe9a0d55915faef4ac5e
 Patch0:		%{name}-pythondirs.patch
 Patch1:		%{name}-textbox.patch
@@ -32,6 +33,7 @@ BuildRequires:	popt-devel
 BuildRequires:	slang-devel
 %{?!with_c_only:BuildRequires:	tcl-devel >= 8.3.2}
 BuildRequires:	docbook-utils
+BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -178,6 +180,7 @@ przyjazny.
 	--enable-gpm-support
 
 %{__make} \
+	CC="%{__cc}" \
 	PROGS="whiptail %{?!with_c_only:whiptcl.so} testgrid"
 
 %install
