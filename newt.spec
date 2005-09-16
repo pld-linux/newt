@@ -1,6 +1,7 @@
 #
 # Conditional build:
-%bcond_with	c_only	# build only C libraries
+%bcond_without	python
+%bcond_with	tcl
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
@@ -15,23 +16,20 @@ Group:		Libraries
 # http://download.fedora.redhat.com/pub/fedora/linux/core/development/SRPMS/
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	76ebfb749d3bbe9a0d55915faef4ac5e
-Patch0:		%{name}-pythondirs.patch
-Patch1:		%{name}-textbox.patch
-Patch2:		%{name}-install_sh.patch
-Patch3:		%{name}-0.51.6-if1close.patch
-Patch4:		%{name}-omg_fix.patch
-Patch5:		%{name}-PIC.patch
-Patch6:		%{name}-norm.patch
-Patch7:		%{name}-c_only.patch
-Patch8:		%{name}-gcc34.patch
+Patch0:		%{name}-textbox.patch
+Patch1:		%{name}-install_sh.patch
+Patch2:		%{name}-0.51.6-if1close.patch
+Patch3:		%{name}-PIC.patch
+Patch4:		%{name}-c_only.patch
+Patch5:		%{name}-gcc34.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	popt-devel
-%{?!with_c_only:BuildRequires:	python-devel >= 2.2}
+%{?with_python:BuildRequires:	python-devel >= 2.2}
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
-%{?!with_c_only:BuildRequires:	tcl-devel >= 8.3.2}
+%{?with_tcl:BuildRequires:	tcl-devel >= 8.3.2}
 BuildRequires:	docbook-utils
 BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -161,19 +159,17 @@ przyjazny.
 
 %prep
 %setup -q
-#%%patch0 -p1
-#%%patch1 -p1
-#%%patch2 -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 %patch3 -p1
-#%%patch4 -p0
-#%%patch5 -p1
-#%%patch6 -p1
 %if %{with c_only}
-%patch7 -p1
+%patch4 -p1
 %endif
-#%%patch8 -p1
+%patch5 -p1
 
 %build
+sed -i -e 's#gcc#%{__cc}#g' Makefile*
 %{__aclocal}
 %{__autoconf}
 %configure \
@@ -181,7 +177,7 @@ przyjazny.
 
 %{__make} \
 	CC="%{__cc}" \
-	PROGS="whiptail %{?!with_c_only:whiptcl.so} testgrid"
+	PROGS="whiptail %{?with_tcl:whiptcl.so} testgrid"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -209,11 +205,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/whiptail
 
-%if ! %{with c_only}
-#%%files tcl
-#%%defattr(644,root,root,755)
-#%%attr(755,root,root) %{_libdir}/*tcl.so
+%if %{with tcl}
+%files tcl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*tcl.so
+%endif
 
+%if %{with python}
 %files python
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
