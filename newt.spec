@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	python	# don't build Python module (note: needs patch to work)
+%bcond_without	python	# don't build Python module
 %bcond_without	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
@@ -21,6 +21,7 @@ Patch1:		%{name}-install_sh.patch
 Patch2:		%{name}-0.51.6-if1close.patch
 Patch3:		%{name}-PIC.patch
 Patch4:		%{name}-gcc34.patch
+Patch5:		%{name}-nopython.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	popt-devel
@@ -162,6 +163,7 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 sed -i -e 's#gcc#%{__cc}#g' Makefile.in
 
@@ -172,13 +174,15 @@ sed -i -e 's#gcc#%{__cc}#g' Makefile.in
 
 %{__make} \
 	CC="%{__cc}" \
-	PROGS="whiptail %{?with_tcl:whiptcl.so} testgrid"
+	PROGS="whiptail %{?with_tcl:whiptcl.so} testgrid" \
+	%{!?with_python:SNACKSO=}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	%{?with_tcl:WHIPTCLSO=whiptcl.so} \
+	%{!?with_python:SNACKSO=} \
 	instroot=$RPM_BUILD_ROOT \
 	libdir=%{_libdir} \
 	pythondir=%{py_sitedir} \
