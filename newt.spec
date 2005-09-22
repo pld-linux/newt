@@ -1,7 +1,7 @@
 #
 # Conditional build:
-%bcond_without	python	# don't build Python module
-%bcond_with	tcl	# build Tcl module
+%bcond_without	python	# don't build Python module (note: needs patch to work)
+%bcond_without	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
@@ -23,7 +23,6 @@ Patch3:		%{name}-PIC.patch
 Patch4:		%{name}-gcc34.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	popt-devel
 %{?with_python:BuildRequires:	python-devel >= 2.2}
 #BuildRequires:	sgml-tools
@@ -164,9 +163,9 @@ przyjazny.
 %patch3 -p1
 %patch4 -p1
 
+sed -i -e 's#gcc#%{__cc}#g' Makefile.in
+
 %build
-sed -i -e 's#gcc#%{__cc}#g' Makefile*
-%{__aclocal}
 %{__autoconf}
 %configure \
 	--enable-gpm-support
@@ -179,6 +178,7 @@ sed -i -e 's#gcc#%{__cc}#g' Makefile*
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
+	%{?with_tcl:WHIPTCLSO=whiptcl.so} \
 	instroot=$RPM_BUILD_ROOT \
 	libdir=%{_libdir} \
 	pythondir=%{py_sitedir} \
