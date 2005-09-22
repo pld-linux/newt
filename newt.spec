@@ -1,7 +1,7 @@
 #
 # Conditional build:
-%bcond_without	python
-%bcond_with	tcl
+%bcond_without	python	# don't build Python module
+%bcond_with	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
@@ -20,8 +20,7 @@ Patch0:		%{name}-textbox.patch
 Patch1:		%{name}-install_sh.patch
 Patch2:		%{name}-0.51.6-if1close.patch
 Patch3:		%{name}-PIC.patch
-Patch4:		%{name}-c_only.patch
-Patch5:		%{name}-gcc34.patch
+Patch4:		%{name}-gcc34.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -163,10 +162,7 @@ przyjazny.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%if %{with c_only}
 %patch4 -p1
-%endif
-%patch5 -p1
 
 %build
 sed -i -e 's#gcc#%{__cc}#g' Makefile*
