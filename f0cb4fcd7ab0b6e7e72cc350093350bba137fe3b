@@ -1,0 +1,1 @@
+- added aclocal/autoconf in %build, build ok with ac-25
