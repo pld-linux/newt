@@ -1,23 +1,32 @@
---- newt-0.51.6/Makefile.in.orig	2005-09-22 21:13:48.098787000 +0200
-+++ newt-0.51.6/Makefile.in	2005-09-22 21:17:41.344329128 +0200
-@@ -16,6 +16,7 @@
+--- newt-0.52.2/Makefile.in~	2006-05-18 02:14:47.822814196 +0300
++++ newt-0.52.2/Makefile.in	2006-05-18 02:17:10.386024154 +0300
+@@ -13,6 +13,7 @@
+ PYTHONVERS = python2.4
  
- WHIPTCLSO=
- #WHIPTCLSO=whiptcl.so
+ WHIPTCLSO=whiptcl.so
 +SNACKSO=_snackmodule.so
  
  PROGS = test whiptail $(WHIPTCLSO) testgrid testtree showchars showkey
  TESTOBJS = test.o
-@@ -49,7 +50,7 @@
+@@ -46,7 +46,7 @@
  TARGET=depend $(PROGS)
  endif
  
--all:	$(TARGET) _snackmodule.so
-+all:	$(TARGET) $(SNACKSO)
+-all:	$(TARGET) _snackmodule.so po/stamp-po
++all:	$(TARGET) $(SNACKSO) po/stamp-po
  
- test:	$(TESTOBJS) $(LIBNEWT)
- 	athlon-pld-linux-gcc -g -o test $(TESTOBJS) $(LIBNEWT) $(LIBS) -static
-@@ -126,13 +127,13 @@
+ po/stamp-po:
+ 	$(MAKE) -C po stamp-po
+@@ -67,7 +67,7 @@
+ 	$(CC) -g -o showkey showkey.o $(LIBNEWT) $(LIBS)
+ 
+ _snackmodule.so:   snackmodule.c $(LIBNEWTSH)
+-	for ver in $(PYTHONVERS) ; do \
++	[ -z "$(SNACKSO)" ] || for ver in $(PYTHONVERS) ; do \
+ 	    if [ ! -f "$$ver/_snackmodule.so" -o $(LIBNEWTSH) -nt "$$ver/_snackmodule.so" ]; then \
+ 	    	mkdir -p $$ver ;\
+ 	        $(CC) $(CFLAGS) -I/usr/include/$$ver -fPIC -c -o $$ver/snackmodule.o snackmodule.c ;\
+@@ -136,7 +136,7 @@
  	install -m 644 $(LIBNEWT) $(instroot)/$(libdir)
  	install -m 755 whiptail $(instroot)/$(bindir)
  
@@ -25,6 +34,8 @@
 +install-sh: sharedlib $(WHIPTCLSO) $(SNACKSO)
  	[ -d $(instroot)/$(libdir) ] || install -m 755 -d $(instroot)/$(libdir)
  	install -m 755 $(LIBNEWTSH) $(instroot)/$(libdir)
+ 	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
+@@ -142,7 +142,7 @@
  	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
  	ln -sf $(LIBNEWTSONAME) $(instroot)/$(libdir)/libnewt.so
  	[ -n "$(WHIPTCLSO)" ] && install -m 755 whiptcl.so $(instroot)/$(libdir) || :
