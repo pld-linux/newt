@@ -24,13 +24,13 @@ Patch4:		%{name}-gcc34.patch
 Patch5:		%{name}-nopython.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
+BuildRequires:	docbook-utils
 BuildRequires:	popt-devel
 %{?with_python:BuildRequires:	python-devel >= 2.2}
+BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_tcl:BuildRequires:	tcl-devel >= 8.3.2}
-BuildRequires:	docbook-utils
-BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -125,18 +125,20 @@ Newt Tcl bindings.
 %description tcl -l pl
 Dodatki do Tcl z Newta.
 
-%package python
+%package -n python-snack
 Summary:	Newt python bindings
 Summary(pl):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
-Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq	python
-Provides:	snack
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-python = %{version}-%{release}
+Provides:	snack = %{version}-%{release}
+Obsoletes:	newt-python
 
-%description python
+%description -n python-snack
 Newt python bindings
 
-%description python -l pl
+%description -n python-snack -l pl
 Dodatki do pythona z Newta.
 
 %package -n whiptail
@@ -212,7 +214,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with python}
-%files python
+%files -n python-snack
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
 %{py_sitedir}/*.py
