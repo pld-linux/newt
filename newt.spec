@@ -10,7 +10,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.2
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 # http://download.fedora.redhat.com/pub/fedora/linux/core/development/SRPMS/
@@ -190,6 +190,10 @@ rm -rf $RPM_BUILD_ROOT
 	pythondir=%{py_sitedir} \
 	pythonbindir=%{py_sitedir}
 
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+%py_postclean
+
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
 
@@ -217,7 +221,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python-snack
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
-%{py_sitedir}/*.py
+%{py_sitedir}/*.py[co]
 %endif
 
 %files devel
