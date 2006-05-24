@@ -30,7 +30,7 @@ BuildRequires:	popt-devel
 BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
-%{?with_tcl:BuildRequires:	tcl-devel >= 8.3.2}
+%{?with_tcl:BuildRequires:	tcl-devel >= 8.4}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -167,7 +167,7 @@ przyjazny.
 %patch4 -p1
 %patch5 -p1
 
-sed -i -e 's#gcc#%{__cc}#g' Makefile.in
+sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
 
 %build
 %{__autoconf}
@@ -176,6 +176,8 @@ sed -i -e 's#gcc#%{__cc}#g' Makefile.in
 
 %{__make} \
 	CC="%{__cc}" \
+	RPM_OPT_FLAGS="%{rpmcflags}" \
+	LIBTCL=-ltcl \
 	PROGS="whiptail %{?with_tcl:whiptcl.so} testgrid" \
 	%{!?with_python:SNACKSO=}
 
