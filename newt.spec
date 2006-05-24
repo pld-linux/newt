@@ -10,7 +10,7 @@ Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.2
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 # http://download.fedora.redhat.com/pub/fedora/linux/core/development/SRPMS/
