@@ -1,0 +1,2 @@
+- use -ltcl instead of -ltcl8.4 to link whiptcl (ready for tcl 8.5 now)
+- optflags fix
