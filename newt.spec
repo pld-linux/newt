@@ -22,11 +22,12 @@ Patch2:		%{name}-0.51.6-if1close.patch
 Patch3:		%{name}-PIC.patch
 Patch4:		%{name}-gcc34.patch
 Patch5:		%{name}-nopython.patch
+Patch6:		%{name}-python25.patch
 URL:		http://www.msg.com.mx/Newt/
 BuildRequires:	autoconf
 BuildRequires:	docbook-utils
 BuildRequires:	popt-devel
-%{?with_python:BuildRequires:	python-devel >= 2.2}
+%{?with_python:BuildRequires:	python-devel >= 1:2.5}
 BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
@@ -166,6 +167,7 @@ przyjazny.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
 
