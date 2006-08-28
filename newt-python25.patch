@@ -1,0 +1,12 @@
+diff -urN aaa/newt-0.52.2/Makefile.in newt-0.52.2/Makefile.in
+--- aaa/newt-0.52.2/Makefile.in	2006-08-28 16:57:11.097187704 +0200
++++ newt-0.52.2/Makefile.in	2006-08-28 16:56:08.036774344 +0200
+@@ -10,7 +10,7 @@
+ CVSTAG = r$(subst .,-,$(VERSION))
+ SONAME = @SONAME@
+ 
+-PYTHONVERS = python2.4
++PYTHONVERS = python2.5
+ 
+ WHIPTCLSO=whiptcl.so
+ SNACKSO=_snackmodule.so
