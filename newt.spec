@@ -187,7 +187,7 @@ sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	%{?with_tcl:WHIPTCLSO=whiptcl.so} \
+	%{!?with_tcl:WHIPTCLSO=} \
 	%{!?with_python:SNACKSO=} \
 	instroot=$RPM_BUILD_ROOT \
 	libdir=%{_libdir} \
