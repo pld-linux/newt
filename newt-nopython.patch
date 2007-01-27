@@ -1,22 +1,22 @@
 --- newt-0.52.2/Makefile.in~	2006-05-18 02:14:47.822814196 +0300
 +++ newt-0.52.2/Makefile.in	2006-05-18 02:17:10.386024154 +0300
 @@ -13,6 +13,7 @@
- PYTHONVERS = python2.4
- 
- WHIPTCLSO=whiptcl.so
-+SNACKSO=_snackmodule.so
+
+ PYTHONVERS = @PYTHONVERS@ 
+ WHIPTCLSO = @WHIPTCLSO@
++SNACKSO = _snackmodule.so
  
  PROGS = test whiptail $(WHIPTCLSO) testgrid testtree showchars showkey
- TESTOBJS = test.o
+ TESTOBJS = test.o testgrid.o testtree.o showchars.o showkey.o
 @@ -46,7 +46,7 @@
  TARGET=depend $(PROGS)
  endif
  
--all:	$(TARGET) _snackmodule.so po/stamp-po
-+all:	$(TARGET) $(SNACKSO) po/stamp-po
- 
- po/stamp-po:
- 	$(MAKE) -C po stamp-po
+-all:	$(TARGET) _snackmodule.so
++all:	$(TARGET) $(SNACKSO)
+
+ test:	test.o $(LIBNEWT)
+ 	$(CC) -g -o test test.o $(LIBNEWT) $(LIBS) 
 @@ -67,7 +67,7 @@
  	$(CC) -g -o showkey showkey.o $(LIBNEWT) $(LIBS)
  
@@ -36,8 +36,8 @@
  	install -m 755 $(LIBNEWTSH) $(instroot)/$(libdir)
  	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
 @@ -142,7 +142,7 @@
- 	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
  	ln -sf $(LIBNEWTSONAME) $(instroot)/$(libdir)/libnewt.so
+ 	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
  	[ -n "$(WHIPTCLSO)" ] && install -m 755 whiptcl.so $(instroot)/$(libdir) || :
 -	for ver in $(PYTHONVERS) ; do \
 +	[ -z "$(SNACKSO)" ] || for ver in $(PYTHONVERS) ; do \
