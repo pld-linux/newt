@@ -1,0 +1,57 @@
+--- Makefile.in.org	2007-01-27 23:03:10.003192750 +0100
++++ Makefile.in	2007-01-27 23:07:13.690422250 +0100
+@@ -54,19 +54,19 @@
+ all:	$(TARGET) $(SNACKSO)
+ 
+ test:	test.o $(LIBNEWT)
+-	$(CC) -g -o test test.o $(LIBNEWT) $(LIBS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o test test.o $(LIBNEWT) $(LIBS)
+ 
+ testgrid:	testgrid.o $(LIBNEWT)
+-	$(CC) -g -o testgrid testgrid.o $(LIBNEWT) $(LIBS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o testgrid testgrid.o $(LIBNEWT) $(LIBS)
+ 
+ testtree:	testtree.o $(LIBNEWT)
+-	$(CC) -g -o testtree testtree.o $(LIBNEWT) $(LIBS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o testtree testtree.o $(LIBNEWT) $(LIBS)
+ 
+ showchars:	showchars.o $(LIBNEWT)
+-	$(CC) -g -o showchars showchars.o $(LIBNEWT) $(LIBS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o showchars showchars.o $(LIBNEWT) $(LIBS)
+ 
+ showkey:	showkey.o $(LIBNEWT)
+-	$(CC) -g -o showkey showkey.o $(LIBNEWT) $(LIBS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o showkey showkey.o $(LIBNEWT) $(LIBS)
+ 
+ _snackmodule.so:   snackmodule.c $(LIBNEWTSH)
+ 	[ -z "$(SNACKSO)" ] || for ver in $(PYTHONVERS) ; do \
+@@ -79,16 +79,16 @@
+ 	touch $@
+ 
+ whiptail: $(NDIALOGOBJS) $(LIBNEWTSH)
+-	$(CC) -g -o whiptail $(NDIALOGOBJS) -L . -lnewt $(LIBS) -lpopt
++	$(CC) $(CFLAGS) $(CPPFLAGS) -o whiptail $(NDIALOGOBJS) -L . -lnewt $(LIBS) -lpopt
+ 
+ whiptcl.o:   whiptcl.c
+-	gcc -fPIC $(CFLAGS) -c whiptcl.c
++	gcc -fPIC $(CFLAGS) $(CPPFLAGS) -c whiptcl.c
+ 
+ dialogboxes.o:   dialogboxes.c
+-	gcc -fPIC $(CFLAGS) -c dialogboxes.c
++	gcc -fPIC $(CFLAGS) $(CPPFLAGS) -c dialogboxes.c
+ 
+ whiptcl.so: $(WHIPTCLOBJS) $(LIBNEWTSH)
+-	$(CC) -shared $(SHCFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . -lnewt  $(LIBTCL) -lslang -lpopt -lm
++	$(CC) -shared $(SHCFLAGS) $(CFLAGS) $(CPPFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . -lnewt  $(LIBTCL) -lslang -lpopt -lm
+ 
+ $(LIBNEWT): $(LIBOBJS)
+ 	ar rv $@ $^
+@@ -103,7 +103,7 @@
+ 		$(SHAREDDIR)/*.o *.so*
+ 
+ depend:
+-	$(CPP) $(CFLAGS) $(CPPFLAGS) -M $(SOURCES) > .depend
++	$(CPP) $(CPPFLAGS) -M $(SOURCES) > .depend
+ 
+ $(SHAREDDIR):
+ 	mkdir -p $(SHAREDDIR)
