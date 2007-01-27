@@ -9,21 +9,20 @@ Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.2
-Release:	3
+Version:	0.52.4
+Release:	1
 License:	LGPL
 Group:		Libraries
-# http://download.fedora.redhat.com/pub/fedora/linux/core/development/SRPMS/
+# http://download.fedora.redhat.com/pub/fedora/linux/core/development/source/SRPMS/
 Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	3ab21d288fc156a29519cc3e6db57961
+# Source0-md5:	0818c0d397fb6b5ee61a6747327599e4
 Patch0:		%{name}-textbox.patch
-Patch1:		%{name}-install_sh.patch
-Patch2:		%{name}-0.51.6-if1close.patch
-Patch3:		%{name}-PIC.patch
-Patch4:		%{name}-gcc34.patch
-Patch5:		%{name}-nopython.patch
-Patch6:		%{name}-python25.patch
-URL:		http://www.msg.com.mx/Newt/
+Patch1:		%{name}-0.51.6-if1close.patch
+Patch2:		%{name}-PIC.patch
+Patch3:		%{name}-gcc34.patch
+Patch4:		%{name}-nopython.patch
+Patch5:		%{name}-objfree.patch
+Patch6:		%{name}-make.patch
 BuildRequires:	autoconf
 BuildRequires:	docbook-utils
 BuildRequires:	popt-devel
@@ -31,7 +30,7 @@ BuildRequires:	popt-devel
 BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
-%{?with_tcl:BuildRequires:	tcl-devel >= 8.4}
+%{?with_tcl:BuildRequires:	tcl-devel >= 8.5}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -166,10 +165,11 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
+%patch5 -p0
+%patch6 -p0
 
 sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
+sed -i -e 's#tcl8.4#tcl8.5#g' Makefile.in
 
 %build
 %{__autoconf}
@@ -177,6 +177,7 @@ sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
 	--enable-gpm-support
 
 %{__make} \
+	PYTHONVERS=python%{py_ver} \
 	CC="%{__cc}" \
 	RPM_OPT_FLAGS="%{rpmcflags}" \
 	LIBTCL=-ltcl \
@@ -187,6 +188,7 @@ sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
+	PYTHONVERS=python%{py_ver} \
 	%{!?with_tcl:WHIPTCLSO=} \
 	%{!?with_python:SNACKSO=} \
 	instroot=$RPM_BUILD_ROOT \
@@ -201,19 +203,22 @@ rm -rf $RPM_BUILD_ROOT
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so.*.*
 
 %files -n whiptail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/whiptail
+%{_mandir}/man1/whiptail.1*
 
 %if %{with tcl}
 %files tcl
