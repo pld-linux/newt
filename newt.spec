@@ -4,10 +4,10 @@
 %bcond_without	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
-Summary(de):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
-Summary(fr):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
-Summary(pl):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
-Summary(tr):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
+Summary(de.UTF-8):   Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
+Summary(fr.UTF-8):   Not Erik's Windowing Toolkit - fenÃªtrage en mode texte avec slang
+Summary(pl.UTF-8):   Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
+Summary(tr.UTF-8):   Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.4
 Release:	1
@@ -42,39 +42,39 @@ and forms may be nested to provide extra functionality. This pacakge
 contains the shared library for programs that have been built with
 newt.
 
-%description -l de
-Newt ist ein Windowing-Toolkit für Textmodus, konstruiert auf der
+%description -l de.UTF-8
+Newt ist ein Windowing-Toolkit fÃ¼r Textmodus, konstruiert auf der
 Grundlage der Slang-Library, mit dessen Hilfe Farbtext-Modus-
-Applikationen leicht mit stapelbaren Fenstern, Schaltflächen,
-Optionskästchen, Listen, Eingabefeldern, Etiketten und Display-Text
-arbeiten können. Auch Bildlaufleisten erden unterstützt, und der
-Einbau von Formularen ist möglich, wenn zusätzliche Funktionalität
+Applikationen leicht mit stapelbaren Fenstern, SchaltflÃ¤chen,
+OptionskÃ¤stchen, Listen, Eingabefeldern, Etiketten und Display-Text
+arbeiten kÃ¶nnen. Auch Bildlaufleisten erden unterstÃ¼tzt, und der
+Einbau von Formularen ist mÃ¶glich, wenn zusÃ¤tzliche FunktionalitÃ¤t
 gefordert ist.
 
-%description -l fr
-Newt est une boite à outil de fenétrage en mode texte, construit sur
+%description -l fr.UTF-8
+Newt est une boite Ã  outil de fenÃ©trage en mode texte, construit sur
 la librarie slang. Elle permet aux applications en mode texte
-d'utiliser simplement de multiples fenêtres, des bouttons, des cases à
-cocher... Les barres de défilement sont supportées, et les fenêtres
-peuvent être imbriquées pour donner des fonctionnalités nouvelles.
+d'utiliser simplement de multiples fenÃªtres, des bouttons, des cases Ã 
+cocher... Les barres de dÃ©filement sont supportÃ©es, et les fenÃªtres
+peuvent Ãªtre imbriquÃ©es pour donner des fonctionnalitÃ©s nouvelles.
 
-%description -l pl
-Newt jest bibliotek± typu toolkit ale do trybu tekstowego, osadzon± na
-bibliotece slang. Umo¿liwia budowanie aplikacji pracuj±cych w trybie
-tekstowym umo¿liwiaj±c operowanie na okienkach, przyciskach (push
-button), listach wyboru, etykietach i elementach tekstowych jakie s±
-potrzebne przy tworzeniu interfejsu u¿ytkownika w ró¿nych aplikacjach.
+%description -l pl.UTF-8
+Newt jest bibliotekÄ… typu toolkit ale do trybu tekstowego, osadzonÄ… na
+bibliotece slang. UmoÅ¼liwia budowanie aplikacji pracujÄ…cych w trybie
+tekstowym umoÅ¼liwiajÄ…c operowanie na okienkach, przyciskach (push
+button), listach wyboru, etykietach i elementach tekstowych jakie sÄ…
+potrzebne przy tworzeniu interfejsu uÅ¼ytkownika w rÃ³Å¼nych aplikacjach.
 
-%description -l tr
-Newt ile karakter tabanlý ekranlarda renkli pencereler, kaydýrma
-çubuklarý, çeþitli tuþlar oluþturulabilir.
+%description -l tr.UTF-8
+Newt ile karakter tabanlÄ± ekranlarda renkli pencereler, kaydÄ±rma
+Ã§ubuklarÄ±, Ã§eÅŸitli tuÅŸlar oluÅŸturulabilir.
 
 %package devel
 Summary:	Developer's toolkit for newt windowing library
-Summary(de):	Entwickler-Toolkit für die newt-Windowing-Library
-Summary(fr):	Toolkit de développement pour la bibliothèque de fenêtrage newt
-Summary(pl):	Pliki nag³ówkowe dla newt
-Summary(tr):	newt pencere kitaplýðý için geliþtirme dosyalarý
+Summary(de.UTF-8):   Entwickler-Toolkit fÃ¼r die newt-Windowing-Library
+Summary(fr.UTF-8):   Toolkit de dÃ©veloppement pour la bibliothÃ¨que de fenÃªtrage newt
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe dla newt
+Summary(tr.UTF-8):   newt pencere kitaplÄ±ÄŸÄ± iÃ§in geliÅŸtirme dosyalarÄ±
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -83,51 +83,51 @@ These are the header files and libraries for developing applications
 which use newt. Newt is a windowing toolkit for text mode, which
 provides many widgets and stackable windows.
 
-%description devel -l de
+%description devel -l de.UTF-8
 Dies sind die Header-Dateien und Libraries zur Entwicklung von
 Applikationen, die mit newt arbeiten. Newt ist ein Windowing-Toolkit
-für Textmodus, der viele Widgets und stapelbare Fenster enthält.
+fÃ¼r Textmodus, der viele Widgets und stapelbare Fenster enthÃ¤lt.
 
-%description devel -l fr
-En-têtes et bibliothèques pour le développement d'applications
-utilisant newt. newt est un tookit de fenêtrage pour le mode texte
-offrant de nombreux widgets et des fenêtres empilables.
+%description devel -l fr.UTF-8
+En-tÃªtes et bibliothÃ¨ques pour le dÃ©veloppement d'applications
+utilisant newt. newt est un tookit de fenÃªtrage pour le mode texte
+offrant de nombreux widgets et des fenÃªtres empilables.
 
-%description devel -l pl
-Pliki nag³ówkowe dla newt.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe dla newt.
 
-%description devel -l tr
-Bu paket, newt ile geliþtirme yapmak için gereken baþlýk dosyalarýný
-ve kitaplýklarý içerir. Newt, metin ekranda çalýþan bir pencereleme
-kitaplýðýdýr.
+%description devel -l tr.UTF-8
+Bu paket, newt ile geliÅŸtirme yapmak iÃ§in gereken baÅŸlÄ±k dosyalarÄ±nÄ±
+ve kitaplÄ±klarÄ± iÃ§erir. Newt, metin ekranda Ã§alÄ±ÅŸan bir pencereleme
+kitaplÄ±ÄŸÄ±dÄ±r.
 
 %package static
 Summary:	Newt static library
-Summary(pl):	Biblioteka statyczna newt
+Summary(pl.UTF-8):   Biblioteka statyczna newt
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Newt static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna newt.
 
 %package tcl
 Summary:	Newt Tcl bindings
-Summary(pl):	Dodatki do Tcl z Newta
+Summary(pl.UTF-8):   Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
 Requires:	%{name} = %{version}-%{release}
 
 %description tcl
 Newt Tcl bindings.
 
-%description tcl -l pl
+%description tcl -l pl.UTF-8
 Dodatki do Tcl z Newta.
 
 %package -n python-snack
 Summary:	Newt python bindings
-Summary(pl):	Dodatki do pythona z Newta
+Summary(pl.UTF-8):   Dodatki do pythona z Newta
 Group:		Development/Languages/Python
 %pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
@@ -138,12 +138,12 @@ Obsoletes:	newt-python
 %description -n python-snack
 Newt python bindings
 
-%description -n python-snack -l pl
+%description -n python-snack -l pl.UTF-8
 Dodatki do pythona z Newta.
 
 %package -n whiptail
 Summary:	A dialog compliant program to build tty dialog boxes
-Summary(pl):	Program do tekstowych okienek dialogowych kompatybilny z dialog
+Summary(pl.UTF-8):   Program do tekstowych okienek dialogowych kompatybilny z dialog
 Group:		Applications/Terminal
 
 %description -n whiptail
@@ -152,10 +152,10 @@ TTY (text mode only). You can call dialog from within a shell script
 to ask the user questions or present with choices in a more user
 friendly manner.
 
-%description -n whiptail -l pl
-Program umo¿liwiaj±cy budowaæ interfejsy u¿ytkownika na terminalu
-tekstowym, kompatybilny z programem dialog. Pozwala wywo³aæ dialog ze
-skryptu shella, aby zdaæ pytania u¿ytkownikowi w sposób bardziej
+%description -n whiptail -l pl.UTF-8
+Program umoÅ¼liwiajÄ…cy budowaÄ‡ interfejsy uÅ¼ytkownika na terminalu
+tekstowym, kompatybilny z programem dialog. Pozwala wywoÅ‚aÄ‡ dialog ze
+skryptu shella, aby zdaÄ‡ pytania uÅ¼ytkownikowi w sposÃ³b bardziej
 przyjazny.
 
 %prep
