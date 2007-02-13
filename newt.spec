@@ -4,10 +4,10 @@
 %bcond_without	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
-Summary(de.UTF-8):   Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
-Summary(fr.UTF-8):   Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
-Summary(pl.UTF-8):   Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
-Summary(tr.UTF-8):   Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
+Summary(de.UTF-8):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
+Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
+Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
+Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.4
 Release:	1
@@ -71,10 +71,10 @@ Newt ile karakter tabanlı ekranlarda renkli pencereler, kaydırma
 
 %package devel
 Summary:	Developer's toolkit for newt windowing library
-Summary(de.UTF-8):   Entwickler-Toolkit für die newt-Windowing-Library
-Summary(fr.UTF-8):   Toolkit de développement pour la bibliothèque de fenêtrage newt
-Summary(pl.UTF-8):   Pliki nagłówkowe dla newt
-Summary(tr.UTF-8):   newt pencere kitaplığı için geliştirme dosyaları
+Summary(de.UTF-8):	Entwickler-Toolkit für die newt-Windowing-Library
+Summary(fr.UTF-8):	Toolkit de développement pour la bibliothèque de fenêtrage newt
+Summary(pl.UTF-8):	Pliki nagłówkowe dla newt
+Summary(tr.UTF-8):	newt pencere kitaplığı için geliştirme dosyaları
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -103,7 +103,7 @@ kitaplığıdır.
 
 %package static
 Summary:	Newt static library
-Summary(pl.UTF-8):   Biblioteka statyczna newt
+Summary(pl.UTF-8):	Biblioteka statyczna newt
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -115,7 +115,7 @@ Biblioteka statyczna newt.
 
 %package tcl
 Summary:	Newt Tcl bindings
-Summary(pl.UTF-8):   Dodatki do Tcl z Newta
+Summary(pl.UTF-8):	Dodatki do Tcl z Newta
 Group:		Development/Languages/Tcl
 Requires:	%{name} = %{version}-%{release}
 
@@ -127,7 +127,7 @@ Dodatki do Tcl z Newta.
 
 %package -n python-snack
 Summary:	Newt python bindings
-Summary(pl.UTF-8):   Dodatki do pythona z Newta
+Summary(pl.UTF-8):	Dodatki do pythona z Newta
 Group:		Development/Languages/Python
 %pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
@@ -143,7 +143,7 @@ Dodatki do pythona z Newta.
 
 %package -n whiptail
 Summary:	A dialog compliant program to build tty dialog boxes
-Summary(pl.UTF-8):   Program do tekstowych okienek dialogowych kompatybilny z dialog
+Summary(pl.UTF-8):	Program do tekstowych okienek dialogowych kompatybilny z dialog
 Group:		Applications/Terminal
 
 %description -n whiptail
