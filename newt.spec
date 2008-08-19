@@ -9,20 +9,20 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.4
+Version:	0.52.10
 Release:	1
 License:	LGPL
 Group:		Libraries
 # http://download.fedora.redhat.com/pub/fedora/linux/core/development/source/SRPMS/
-Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	0818c0d397fb6b5ee61a6747327599e4
+Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
+# Source0-md5:	bcbcc87ec19ba37d34f819209afa2e15
 Patch0:		%{name}-textbox.patch
 Patch1:		%{name}-0.51.6-if1close.patch
 Patch2:		%{name}-PIC.patch
 Patch3:		%{name}-gcc34.patch
 Patch4:		%{name}-nopython.patch
-Patch5:		%{name}-objfree.patch
-Patch6:		%{name}-make.patch
+Patch5:		%{name}-make.patch
+URL:		https://fedorahosted.org/newt/
 BuildRequires:	autoconf
 BuildRequires:	docbook-utils
 BuildRequires:	popt-devel
@@ -165,23 +165,17 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p0
-%patch6 -p0
-
-sed -i -e 's#gcc#%{__cc}#g;s,-g -O2,,g' Makefile.in
-sed -i -e 's#tcl8.4#tcl8.5#g' Makefile.in
+%patch5 -p1 -b .orig
 
 %build
 %{__autoconf}
 %configure \
-	--enable-gpm-support
+	--with-gpm-support \
+	%{!?with_tcl:--without-tcl}
 
 %{__make} \
 	PYTHONVERS=python%{py_ver} \
-	CC="%{__cc}" \
-	RPM_OPT_FLAGS="%{rpmcflags}" \
 	LIBTCL=-ltcl \
-	PROGS="whiptail %{?with_tcl:whiptcl.so} testgrid" \
 	%{!?with_python:SNACKSO=}
 
 %install
@@ -213,31 +207,32 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so.*.*
+%attr(755,root,root) %{_libdir}/libnewt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libnewt.so.0.52
 
-%files -n whiptail
+%files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/whiptail
-%{_mandir}/man1/whiptail.1*
+%attr(755,root,root) %{_libdir}/libnewt.so
+%{_includedir}/newt.h
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libnewt.a
 
 %if %{with tcl}
 %files tcl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*tcl.so
+%attr(755,root,root) %{_libdir}/whiptcl.so
 %endif
 
 %if %{with python}
 %files -n python-snack
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/*.so
-%{py_sitedir}/*.py[co]
+%attr(755,root,root) %{py_sitedir}/_snackmodule.so
+%{py_sitedir}/snack.py[co]
 %endif
 
-%files devel
+%files -n whiptail
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/*.h
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/*.a
+%attr(755,root,root) %{_bindir}/whiptail
+%{_mandir}/man1/whiptail.1*
