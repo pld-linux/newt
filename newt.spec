@@ -13,7 +13,6 @@ Version:	0.52.10
 Release:	1
 License:	LGPL
 Group:		Libraries
-# http://download.fedora.redhat.com/pub/fedora/linux/core/development/source/SRPMS/
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
 # Source0-md5:	bcbcc87ec19ba37d34f819209afa2e15
 Patch0:		%{name}-textbox.patch
