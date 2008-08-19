@@ -1,6 +1,6 @@
---- Makefile.in.org	2007-01-27 23:03:10.003192750 +0100
-+++ Makefile.in	2007-01-27 23:07:13.690422250 +0100
-@@ -54,19 +54,19 @@
+--- newt-0.52.10/Makefile.in.orig	2008-08-19 21:13:55.701247852 +0200
++++ newt-0.52.10/Makefile.in	2008-08-19 21:15:15.285242824 +0200
+@@ -53,19 +53,19 @@
  all:	$(TARGET) $(SNACKSO)
  
  test:	test.o $(LIBNEWT)
@@ -24,8 +24,8 @@
 +	$(CC) $(CFLAGS) $(CPPFLAGS) -o showkey showkey.o $(LIBNEWT) $(LIBS)
  
  _snackmodule.so:   snackmodule.c $(LIBNEWTSH)
- 	[ -z "$(SNACKSO)" ] || for ver in $(PYTHONVERS) ; do \
-@@ -79,16 +79,16 @@
+ 	for ver in $(PYTHONVERS) ; do \
+@@ -76,16 +76,16 @@
  	touch $@
  
  whiptail: $(NDIALOGOBJS) $(LIBNEWTSH)
@@ -34,11 +34,11 @@
  
  whiptcl.o:   whiptcl.c
 -	gcc -fPIC $(CFLAGS) -c whiptcl.c
-+	gcc -fPIC $(CFLAGS) $(CPPFLAGS) -c whiptcl.c
++	$(CC) -fPIC $(CFLAGS) $(CPPFLAGS) -c whiptcl.c
  
  dialogboxes.o:   dialogboxes.c
 -	gcc -fPIC $(CFLAGS) -c dialogboxes.c
-+	gcc -fPIC $(CFLAGS) $(CPPFLAGS) -c dialogboxes.c
++	$(CC) -fPIC $(CFLAGS) $(CPPFLAGS) -c dialogboxes.c
  
  whiptcl.so: $(WHIPTCLOBJS) $(LIBNEWTSH)
 -	$(CC) -shared $(SHCFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . -lnewt  $(LIBTCL) -lslang -lpopt -lm
@@ -46,12 +46,22 @@
  
  $(LIBNEWT): $(LIBOBJS)
  	ar rv $@ $^
-@@ -103,7 +103,7 @@
+@@ -100,14 +100,15 @@
  		$(SHAREDDIR)/*.o *.so*
  
  depend:
 -	$(CPP) $(CFLAGS) $(CPPFLAGS) -M $(SOURCES) > .depend
 +	$(CPP) $(CPPFLAGS) -M $(SOURCES) > .depend
  
- $(SHAREDDIR):
+-$(SHAREDDIR):
++.shared.dir:
  	mkdir -p $(SHAREDDIR)
++	touch .shared.dir
+ 
+ sharedlib: $(LIBNEWTSH)
+ 
+-$(LIBNEWTSH): $(SHAREDDIR) $(SHAREDOBJS)
++$(LIBNEWTSH): .shared.dir $(SHAREDOBJS)
+ 	$(CC) -shared -o $(LIBNEWTSH) $(SHLIBFLAGS) -Wl,-soname,$(LIBNEWTSONAME) $(SHAREDOBJS) $(LIBS)
+ 	ln -fs $(LIBNEWTSONAME) libnewt.so
+ 	ln -fs $(LIBNEWTSH) $(LIBNEWTSONAME)
