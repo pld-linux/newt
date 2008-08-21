@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze sla
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.10
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
@@ -192,6 +192,9 @@ rm -rf $RPM_BUILD_ROOT
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
+
+# error: newt-0.52.10-1: req /usr/share/locale/bal/LC_MESSAGES not found
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/bal
 
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml
