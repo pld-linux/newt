@@ -9,16 +9,14 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.10
-Release:	4
+Version:	0.52.12
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	bcbcc87ec19ba37d34f819209afa2e15
-Patch0:		%{name}-textbox.patch
+# Source0-md5:	51b04128d9e1bf000fa769c417b74486
 Patch1:		%{name}-0.51.6-if1close.patch
 Patch2:		%{name}-PIC.patch
-Patch3:		%{name}-gcc34.patch
 Patch4:		%{name}-nopython.patch
 Patch5:		%{name}-make.patch
 URL:		https://fedorahosted.org/newt/
@@ -159,12 +157,12 @@ przyjazny.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 %patch4 -p1
 %patch5 -p1 -b .orig
+
+%{__sed} -i -e 's,^#include <slang.h>$,#include <slang/slang.h>,g' dialogboxes.c
 
 %build
 %{__autoconf}
@@ -216,6 +214,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libnewt.so
 %{_includedir}/newt.h
+%{_pkgconfigdir}/libnewt.pc
 
 %files static
 %defattr(644,root,root,755)
