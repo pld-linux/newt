@@ -20,7 +20,7 @@ Patch2:		%{name}-PIC.patch
 Patch4:		%{name}-nopython.patch
 Patch5:		%{name}-make.patch
 URL:		https://fedorahosted.org/newt/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-utils
 BuildRequires:	popt-devel
 %{?with_python:BuildRequires:	python-devel >= 1:2.5}
