@@ -1,6 +1,6 @@
---- newt-0.52.10/Makefile.in.orig	2008-08-19 20:45:13.753250367 +0200
-+++ newt-0.52.10/Makefile.in	2008-08-19 20:45:13.817251205 +0200
-@@ -13,6 +13,7 @@
+--- newt-0.52.13/Makefile.in.orig	2011-06-30 20:14:00.860766835 +0200
++++ newt-0.52.13/Makefile.in	2011-06-30 21:14:35.674221877 +0200
+@@ -14,6 +14,7 @@
  
  PYTHONVERS = @PYTHONVERS@
  WHIPTCLSO = @WHIPTCLSO@
@@ -8,7 +8,7 @@
  
  PROGS = test whiptail $(WHIPTCLSO) testgrid testtree showchars showkey
  TESTOBJS = test.o testgrid.o testtree.o showchars.o showkey.o
-@@ -49,7 +50,7 @@
+@@ -59,7 +60,7 @@
  TARGET=depend $(PROGS)
  endif
  
@@ -16,20 +16,13 @@
 +all:	$(TARGET) $(SNACKSO)
  
  test:	test.o $(LIBNEWT)
- 	$(CC) -g -o test test.o $(LIBNEWT) $(LIBS)
-@@ -125,13 +126,13 @@
- 	install -m 644 whiptail.1 $(instroot)/$(man1dir)
+ 	$(CC) -g -o test test.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
+@@ -141,7 +142,7 @@
  	make -C po datadir=$(instroot)/$(datadir) install
+ 	install -m 644 libnewt.pc $(instroot)/$(pkgconfigdir)
  
 -install-sh: sharedlib $(WHIPTCLSO) _snackmodule.so
 +install-sh: sharedlib $(WHIPTCLSO) $(SNACKSO)
  	[ -d $(instroot)/$(libdir) ] || install -m 755 -d $(instroot)/$(libdir)
  	install -m 755 $(LIBNEWTSH) $(instroot)/$(libdir)
  	ln -sf $(LIBNEWTSONAME) $(instroot)/$(libdir)/libnewt.so
- 	ln -sf $(LIBNEWTSH) $(instroot)/$(libdir)/$(LIBNEWTSONAME)
- 	[ -n "$(WHIPTCLSO)" ] && install -m 755 whiptcl.so $(instroot)/$(libdir) || :
--	for ver in $(PYTHONVERS) ; do \
-+	[ -z "$(SNACKSO)" ] || for ver in $(PYTHONVERS) ; do \
- 	   [ -d $(instroot)/$(libdir)/$$ver/site-packages ] || install -m 755 -d $(instroot)/$(libdir)/$$ver/site-packages ;\
- 	   install -m 755 $$ver/_snackmodule.so $(instroot)/$(libdir)/$$ver/site-packages ;\
- 	   install -m 644 snack.py $(instroot)/$(libdir)/$$ver/site-packages ;\

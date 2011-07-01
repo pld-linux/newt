@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	python	# don't build Python module
+%bcond_without	python	# don't build Python 2 module
 %bcond_without	tcl	# build Tcl module
 #
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
@@ -9,16 +9,17 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.12
+Version:	0.52.13
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	51b04128d9e1bf000fa769c417b74486
-Patch1:		%{name}-0.51.6-if1close.patch
-Patch2:		%{name}-PIC.patch
-Patch4:		%{name}-nopython.patch
-Patch5:		%{name}-make.patch
+# Source0-md5:	77de05b3f58540152a4ae32a1a64e5d0
+Patch0:		%{name}-0.51.6-if1close.patch
+Patch1:		%{name}-PIC.patch
+Patch2:		%{name}-nopython.patch
+Patch3:		%{name}-make.patch
+Patch4:		%{name}-multipython.patch
 URL:		https://fedorahosted.org/newt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-utils
@@ -158,10 +159,11 @@ przyjazny.
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %patch4 -p1
-%patch5 -p1 -b .orig
 
 %{__sed} -i -e 's,^#include <slang.h>$,#include <slang/slang.h>,g' dialogboxes.c
 
@@ -172,7 +174,7 @@ przyjazny.
 	%{!?with_tcl:--without-tcl}
 
 %{__make} \
-	PYTHONVERS=python%{py_ver} \
+	PYTHONVERS="python%{py_ver}" \
 	LIBTCL=-ltcl \
 	%{!?with_python:SNACKSO=}
 
@@ -180,7 +182,7 @@ przyjazny.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	PYTHONVERS=python%{py_ver} \
+	PYTHONVERS="python%{py_ver}" \
 	%{!?with_tcl:WHIPTCLSO=} \
 	%{!?with_python:SNACKSO=} \
 	instroot=$RPM_BUILD_ROOT \
@@ -192,8 +194,8 @@ rm -rf $RPM_BUILD_ROOT
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
 
-# error: newt-0.52.10-1: req /usr/share/locale/bal/LC_MESSAGES not found
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/bal
+# not supported
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/bal
 
 #it just plain doesn't work... fix it if you can
 #sgml2txt tutorial.sgml

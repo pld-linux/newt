@@ -1,53 +1,53 @@
---- newt-0.52.12/Makefile.in.orig	2010-11-05 17:25:34.729541330 +0200
-+++ newt-0.52.12/Makefile.in	2010-11-05 17:29:33.376208002 +0200
-@@ -54,19 +54,19 @@
+--- newt-0.52.13/Makefile.in.orig	2011-06-30 21:15:08.000000000 +0200
++++ newt-0.52.13/Makefile.in	2011-07-01 16:19:26.323188560 +0200
+@@ -63,19 +63,19 @@
  all:	$(TARGET) $(SNACKSO)
  
  test:	test.o $(LIBNEWT)
--	$(CC) -g -o test test.o $(LIBNEWT) $(LIBS)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o test test.o $(LIBNEWT) $(LIBS)
+-	$(CC) -g -o test test.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o test test.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  testgrid:	testgrid.o $(LIBNEWT)
--	$(CC) -g -o testgrid testgrid.o $(LIBNEWT) $(LIBS)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o testgrid testgrid.o $(LIBNEWT) $(LIBS)
+-	$(CC) -g -o testgrid testgrid.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o testgrid testgrid.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  testtree:	testtree.o $(LIBNEWT)
--	$(CC) -g -o testtree testtree.o $(LIBNEWT) $(LIBS)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o testtree testtree.o $(LIBNEWT) $(LIBS)
+-	$(CC) -g -o testtree testtree.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o testtree testtree.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  showchars:	showchars.o $(LIBNEWT)
--	$(CC) -g -o showchars showchars.o $(LIBNEWT) $(LIBS)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o showchars showchars.o $(LIBNEWT) $(LIBS)
+-	$(CC) -g -o showchars showchars.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o showchars showchars.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  showkey:	showkey.o $(LIBNEWT)
--	$(CC) -g -o showkey showkey.o $(LIBNEWT) $(LIBS)
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o showkey showkey.o $(LIBNEWT) $(LIBS)
+-	$(CC) -g -o showkey showkey.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
++	$(CC) $(CFLAGS) -o showkey showkey.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  _snackmodule.so:   snackmodule.c $(LIBNEWTSH)
- 	for ver in $(PYTHONVERS) ; do \
-@@ -77,16 +77,16 @@
+ 	[ -n "$(PYTHONVERS)" ] && for ver in $(PYTHONVERS) ; do \
+@@ -90,16 +90,16 @@
  	touch $@
  
  whiptail: $(NDIALOGOBJS) $(LIBNEWTSH)
--	$(CC) -g -o whiptail $(NDIALOGOBJS) -L . -lnewt $(LIBS) -lpopt
-+	$(CC) $(CFLAGS) $(CPPFLAGS) -o whiptail $(NDIALOGOBJS) -L . -lnewt $(LIBS) -lpopt
+-	$(CC) -g -o whiptail $(NDIALOGOBJS) -L. $(LDFLAGS) -lnewt $(LIBS) -lpopt
++	$(CC) $(CFLAGS) -o whiptail $(NDIALOGOBJS) -L. $(LDFLAGS) -lnewt $(LIBS) -lpopt
  
  whiptcl.o:   whiptcl.c
 -	gcc -fPIC $(CFLAGS) -c whiptcl.c
-+	$(CC) -fPIC $(CFLAGS) $(CPPFLAGS) -c whiptcl.c
++	$(CC) -fPIC $(CFLAGS) -c whiptcl.c
  
  dialogboxes.o:   dialogboxes.c
 -	gcc -fPIC $(CFLAGS) -c dialogboxes.c
 +	$(CC) -fPIC $(CFLAGS) -c dialogboxes.c
  
  whiptcl.so: $(WHIPTCLOBJS) $(LIBNEWTSH)
--	$(CC) -shared $(SHCFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . -lnewt  $(LIBTCL) -lpopt
-+	$(CC) -shared $(SHCFLAGS) $(CFLAGS) $(CPPFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L . -lnewt  $(LIBTCL) -lpopt
+-	$(CC) -shared $(SHCFLAGS) $(LDFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L. -lnewt  $(LIBTCL) -lpopt $(LIBS)
++	$(CC) -shared $(SHCFLAGS) $(CFLAGS) $(LDFLAGS) -o whiptcl.so $(WHIPTCLOBJS) -L. -lnewt  $(LIBTCL) -lpopt $(LIBS)
  
  $(LIBNEWT): $(LIBOBJS)
  	ar rv $@ $^
-@@ -101,14 +101,15 @@
- 		$(SHAREDDIR)/*.o *.so* *.pc
+@@ -114,15 +114,16 @@
+ 		$(SHAREDDIR)/*.o *.so*
  
  depend:
 -	$(CPP) $(CFLAGS) $(CPPFLAGS) -M $(SOURCES) > .depend
@@ -61,7 +61,9 @@
  sharedlib: $(LIBNEWTSH)
  
 -$(LIBNEWTSH): $(SHAREDDIR) $(SHAREDOBJS)
+-	$(CC) -shared -o $(LIBNEWTSH) $(SHLIBFLAGS) $(SHAREDOBJS) $(LDFLAGS) $(LIBS)
 +$(LIBNEWTSH): .shared.dir $(SHAREDOBJS)
- 	$(CC) -shared -o $(LIBNEWTSH) $(SHLIBFLAGS) -Wl,-soname,$(LIBNEWTSONAME) $(SHAREDOBJS) $(LIBS)
++	$(CC) -shared -o $(LIBNEWTSH) $(CFLAGS) $(SHLIBFLAGS) $(SHAREDOBJS) $(LDFLAGS) $(LIBS)
  	ln -fs $(LIBNEWTSONAME) libnewt.so
  	ln -fs $(LIBNEWTSH) $(LIBNEWTSONAME)
+ 
