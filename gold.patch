@@ -1,0 +1,11 @@
+--- newt-0.52.13/configure.ac.wiget	2011-07-17 17:07:20.843018152 +0200
++++ newt-0.52.13/configure.ac	2011-07-17 17:09:11.307821301 +0200
+@@ -19,7 +19,7 @@ AC_PROG_GREP
+ AC_MSG_CHECKING([for GNU ld])
+ LD=`$CC -print-prog-name=ld 2>&5`
+ 
+-if test `$LD -v 2>&1 | $ac_cv_path_GREP -c "GNU ld"` = 0; then
++if test `$LD -v 2>&1 | $ac_cv_path_GREP -cE "GNU (go)?ld"` = 0; then
+   # Not
+   GNU_LD=""
+   AC_MSG_RESULT([no])
