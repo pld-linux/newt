@@ -9,12 +9,12 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.16
+Version:	0.52.17
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	6ce923015cf87ef2c17779d24692f573
+# Source0-md5:	f36d4d908965a0c89fd6fd8b61a6118b
 Patch0:		%{name}-0.51.6-if1close.patch
 Patch1:		%{name}-nopython.patch
 Patch2:		%{name}-make.patch
@@ -231,7 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python}
 %files -n python-snack
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/_snackmodule.so
+%attr(755,root,root) %{py_sitedir}/_snack.so
 %{py_sitedir}/snack.py[co]
 %endif
 

@@ -1,10 +1,10 @@
---- newt-0.52.16/Makefile.in.orig	2013-09-01 20:20:06.584064835 +0200
-+++ newt-0.52.16/Makefile.in	2013-09-01 20:21:46.550727306 +0200
+--- newt-0.52.17/Makefile.in.orig	2014-02-19 17:56:53.000000000 +0100
++++ newt-0.52.17/Makefile.in	2014-03-01 12:36:24.047966175 +0100
 @@ -20,6 +20,7 @@
  else
  WHIPTCLSO =
  endif
-+SNACKSO = _snackmodule.$(SOEXT)
++SNACKSO = _snack.$(SOEXT)
  
  PROGS = test whiptail $(WHIPTCLSO) testgrid testtree showchars showkey
  TESTOBJS = test.o testgrid.o testtree.o showchars.o showkey.o
@@ -12,7 +12,7 @@
  TARGET=depend $(PROGS)
  endif
  
--all:	$(TARGET) _snackmodule.$(SOEXT)
+-all:	$(TARGET) _snack.$(SOEXT)
 +all:	$(TARGET) $(SNACKSO)
  
  test:	test.o $(LIBNEWT)
@@ -21,7 +21,7 @@
  	make -C po datadir=$(instroot)/$(datadir) install
  	install -m 644 libnewt.pc $(instroot)/$(pkgconfigdir)
  
--install-sh: sharedlib $(WHIPTCLSO) _snackmodule.$(SOEXT)
+-install-sh: sharedlib $(WHIPTCLSO) _snack.$(SOEXT)
 +install-sh: sharedlib $(WHIPTCLSO) $(SNACKSO)
  	[ -d $(instroot)/$(libdir) ] || install -m 755 -d $(instroot)/$(libdir)
  	install -m 755 $(LIBNEWTSH) $(instroot)/$(libdir)
