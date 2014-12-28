@@ -22,7 +22,7 @@ Patch3:		gold.patch
 URL:		https://fedorahosted.org/newt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-utils
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	popt-devel
 %{?with_python:BuildRequires:	python-devel >= 1:2.5}
 BuildRequires:	rpm-pythonprov
