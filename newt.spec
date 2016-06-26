@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	doc	# tutorial build
 %bcond_without	python	# Python modules (any)
 %bcond_without	python2	# Python 2 module
 %bcond_without	python3	# Python 3 module
@@ -27,13 +28,12 @@ Patch2:		%{name}-make.patch
 Patch3:		gold.patch
 URL:		https://fedorahosted.org/newt/
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	docbook-utils
+%{?with_doc:BuildRequires:	docbook-utils}
 BuildRequires:	gettext-tools
 BuildRequires:	popt-devel
 %{?with_python2:BuildRequires:	python-devel >= 1:2.5}
 %{?with_python3:BuildRequires:	python3-devel >= 1:3.2}
 BuildRequires:	rpm-pythonprov
-#BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_tcl:BuildRequires:	tcl-devel >= 8.5}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -194,6 +194,10 @@ CPPFLAGS="%{rpmcppflags} -I/usr/include/slang"
 	LIBTCL=-ltcl \
 	%{!?with_python:SNACKSO=}
 
+%if %{with doc}
+docbook2txt tutorial.sgml
+%endif
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -217,9 +221,6 @@ rm -rf $RPM_BUILD_ROOT
 # not supported
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/bal
 
-#it just plain doesn't work... fix it if you can
-#sgml2txt tutorial.sgml
-
 %find_lang %{name}
 
 %clean
@@ -236,6 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%{?with_doc:%doc tutorial.txt}
 %attr(755,root,root) %{_libdir}/libnewt.so
 %{_includedir}/newt.h
 %{_pkgconfigdir}/libnewt.pc
