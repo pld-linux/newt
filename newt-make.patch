@@ -38,15 +38,6 @@
  
  $(LIBNEWT): $(LIBOBJS)
  	ar rv $@ $^
-@@ -122,7 +122,7 @@
- 		$(SHAREDDIR)/*.o *.$(SOEXT)*
- 
- depend:
--	$(CPP) $(CFLAGS) $(CPPFLAGS) -M $(SOURCES) > .depend
-+	$(CPP) $(CPPFLAGS) -M $(SOURCES) > .depend
- 
- $(SHAREDDIR):
- 	mkdir -p $(SHAREDDIR)
 @@ -130,7 +130,7 @@
  sharedlib: $(LIBNEWTSH)
  

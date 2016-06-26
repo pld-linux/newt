@@ -1,20 +1,26 @@
 #
 # Conditional build:
-%bcond_without	python	# don't build Python 2 module
-%bcond_without	tcl	# build Tcl module
+%bcond_without	python	# Python modules (any)
+%bcond_without	python2	# Python 2 module
+%bcond_without	python3	# Python 3 module
+%bcond_without	tcl	# Tcl module
 #
+%if %{without python}
+%undefine	with_python2
+%undefine	with_python3
+%endif
 Summary:	Not Erik's Windowing Toolkit - text mode windowing with slang
 Summary(de.UTF-8):	Nicht Eriks Windowing Toolkit - Textmodus-Windowing mit Slang
 Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec slang
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.17
-Release:	4
-License:	LGPL
+Version:	0.52.19
+Release:	1
+License:	LGPL v2
 Group:		Libraries
 Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	f36d4d908965a0c89fd6fd8b61a6118b
+# Source0-md5:	e4aa0f7943edd39c52481a87f68f412a
 Patch0:		%{name}-0.51.6-if1close.patch
 Patch1:		%{name}-nopython.patch
 Patch2:		%{name}-make.patch
@@ -24,7 +30,8 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-tools
 BuildRequires:	popt-devel
-%{?with_python:BuildRequires:	python-devel >= 1:2.5}
+%{?with_python2:BuildRequires:	python-devel >= 1:2.5}
+%{?with_python3:BuildRequires:	python3-devel >= 1:3.2}
 BuildRequires:	rpm-pythonprov
 #BuildRequires:	sgml-tools
 BuildRequires:	slang-devel >= 2.0.0
@@ -124,20 +131,31 @@ Newt Tcl bindings.
 Dodatki do Tcl z Newta.
 
 %package -n python-snack
-Summary:	Newt python bindings
-Summary(pl.UTF-8):	Dodatki do pythona z Newta
+Summary:	Python 2 binding for Newt library
+Summary(pl.UTF-8):	Wiązanie Pythona 2 do biblioteki Newt
 Group:		Development/Languages/Python
-%pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
-Provides:	%{name}-python = %{version}-%{release}
+Provides:	newt-python = %{version}-%{release}
 Provides:	snack = %{version}-%{release}
 Obsoletes:	newt-python
 
 %description -n python-snack
-Newt python bindings
+Python 2 binding for Newt library.
 
 %description -n python-snack -l pl.UTF-8
-Dodatki do pythona z Newta.
+Wiązanie Pythona 2 do biblioteki Newt.
+
+%package -n python3-snack
+Summary:	Python 3 binding for Newt library
+Summary(pl.UTF-8):	Wiązanie Pythona 3 do biblioteki Newt
+Group:		Development/Languages/Python
+Requires:	%{name} = %{version}-%{release}
+
+%description -n python3-snack
+Python 3 binding for Newt library.
+
+%description -n python3-snack -l pl.UTF-8
+Wiązanie Pythona 3 do biblioteki Newt.
 
 %package -n whiptail
 Summary:	A dialog compliant program to build tty dialog boxes
@@ -163,17 +181,16 @@ przyjazny.
 %patch2 -p1
 %patch3 -p1
 
-%{__sed} -i -e 's,^#include <slang.h>$,#include <slang/slang.h>,g' dialogboxes.c
-
 %build
 %{__autoconf}
+CFLAGS="%{rpmcflags} -fPIC"
+CPPFLAGS="%{rpmcppflags} -I/usr/include/slang"
 %configure \
-	CPPFLAGS="-fPIC %{rpmcppflags}" \
 	--with-gpm-support \
 	%{!?with_tcl:--without-tcl}
 
 %{__make} \
-	PYTHONVERS="python%{py_ver}" \
+	PYTHONVERS="%{?with_python2:python%{py_ver}} %{?with_python3:python%{py3_ver}}" \
 	LIBTCL=-ltcl \
 	%{!?with_python:SNACKSO=}
 
@@ -181,17 +198,21 @@ przyjazny.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	PYTHONVERS="python%{py_ver}" \
+	PYTHONVERS="%{?with_python2:python%{py_ver}} %{?with_python3:python%{py3_ver}}" \
 	%{!?with_tcl:WHIPTCLSO=} \
 	%{!?with_python:SNACKSO=} \
 	instroot=$RPM_BUILD_ROOT \
-	libdir=%{_libdir} \
-	pythondir=%{py_sitedir} \
-	pythonbindir=%{py_sitedir}
+	libdir=%{_libdir}
 
+%if %{with python2}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
+%endif
+%if %{with python3}
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
+%endif
 
 # not supported
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/bal
@@ -209,6 +230,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
+%doc AUTHORS CHANGES README
 %attr(755,root,root) %{_libdir}/libnewt.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libnewt.so.0.52
 
@@ -228,11 +250,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/whiptcl.so
 %endif
 
-%if %{with python}
+%if %{with python2}
 %files -n python-snack
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/_snack.so
 %{py_sitedir}/snack.py[co]
+%endif
+
+%if %{with python3}
+%files -n python3-snack
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py3_sitedir}/_snack.so
+%{py3_sitedir}/snack.py
+%{py3_sitedir}/__pycache__/snack.cpython-*.py[co]
 %endif
 
 %files -n whiptail
