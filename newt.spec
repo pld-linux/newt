@@ -16,17 +16,17 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.19
-Release:	2
+Version:	0.52.20
+Release:	1
 License:	LGPL v2
 Group:		Libraries
-Source0:	https://fedorahosted.org/releases/n/e/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	e4aa0f7943edd39c52481a87f68f412a
+Source0:	http://releases.pagure.org/newt/%{name}-%{version}.tar.gz
+# Source0-md5:	70b288f821234593a8e7920e435b259b
 Patch0:		%{name}-0.51.6-if1close.patch
 Patch1:		%{name}-nopython.patch
 Patch2:		%{name}-make.patch
 Patch3:		gold.patch
-URL:		https://fedorahosted.org/newt/
+URL:		https://pagure.io/newt
 BuildRequires:	autoconf >= 2.50
 %{?with_doc:BuildRequires:	docbook-utils}
 BuildRequires:	gettext-tools
