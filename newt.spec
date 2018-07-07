@@ -28,7 +28,11 @@ Patch2:		%{name}-make.patch
 Patch3:		gold.patch
 URL:		https://pagure.io/newt
 BuildRequires:	autoconf >= 2.50
-%{?with_doc:BuildRequires:	docbook-utils}
+%if %{with doc}
+BuildRequires:	docbook-dtd30-sgml
+BuildRequires:	docbook-utils
+BuildRequires:	lynx
+%endif
 BuildRequires:	gettext-tools
 BuildRequires:	popt-devel
 %{?with_python2:BuildRequires:	python-devel >= 1:2.5}
