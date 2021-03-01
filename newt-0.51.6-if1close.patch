@@ -16,7 +16,7 @@
 +    success = Gpm_Open(&conn, 0);
  #endif
  
-     newtFormSetSize(co);
+     /* draw all of the components */
 @@ -1062,7 +1063,8 @@
      }
      newtRefresh();
