@@ -25,7 +25,6 @@ Source0:	https://releases.pagure.org/newt/%{name}-%{version}.tar.gz
 Patch0:		%{name}-0.51.6-if1close.patch
 Patch1:		%{name}-nopython.patch
 Patch2:		%{name}-make.patch
-Patch3:		gold.patch
 URL:		https://pagure.io/newt
 BuildRequires:	autoconf >= 2.50
 %if %{with doc}
@@ -183,7 +182,6 @@ przyjazny.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__autoconf}
@@ -196,6 +194,7 @@ CPPFLAGS="%{rpmcppflags} -I/usr/include/slang"
 %{__make} \
 	PYTHONVERS="%{?with_python2:python%{py_ver}} %{?with_python3:python%{py3_ver}}" \
 	LIBTCL=-ltcl \
+	GNU_LD=1 \
 	%{!?with_python:SNACKSO=}
 
 %if %{with doc}
