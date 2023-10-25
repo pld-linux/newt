@@ -35,7 +35,9 @@ BuildRequires:	lynx
 BuildRequires:	gettext-tools
 BuildRequires:	popt-devel
 %{?with_python2:BuildRequires:	python-devel >= 1:2.5}
+%{?with_python2:BuildRequires:	python-modules >= 1:2.5}
 %{?with_python3:BuildRequires:	python3-devel >= 1:3.2}
+%{?with_python3:BuildRequires:	python3-modules >= 1:3.2}
 BuildRequires:	rpm-pythonprov
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_tcl:BuildRequires:	tcl-devel >= 8.5}
