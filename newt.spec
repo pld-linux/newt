@@ -17,7 +17,7 @@ Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze sla
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
 Version:	0.52.24
-Release:	
+Release:	2
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://releases.pagure.org/newt/%{name}-%{version}.tar.gz
@@ -181,9 +181,9 @@ przyjazny.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 %{__autoconf}
