@@ -17,12 +17,3 @@
  
  test:	test.o $(LIBNEWT)
  	$(CC) -g -o test test.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
-@@ -149,7 +150,7 @@
- 	install -m 644 whiptail.1 $(instroot)/$(man1dir)
- 	make -C po datadir=$(instroot)/$(datadir) install
- 
--install-sh: sharedlib $(WHIPTCLSO) _snack.$(SOEXT)
-+install-sh: sharedlib $(WHIPTCLSO) $(SNACKSO)
- 	[ -d $(instroot)/$(libdir) ] || install -m 755 -d $(instroot)/$(libdir)
- 	[ -d $(instroot)/$(includedir) ] || install -m 755 -d $(instroot)/$(includedir)
- 	[ -d $(instroot)/$(pkgconfigdir) ] || install -m 755 -d $(instroot)/$(pkgconfigdir)

@@ -16,12 +16,12 @@ Summary(fr.UTF-8):	Not Erik's Windowing Toolkit - fenêtrage en mode texte avec 
 Summary(pl.UTF-8):	Not Erik's Windowing Toolkit - okna w trybie tekstowym ze slangiem
 Summary(tr.UTF-8):	Not Erik's Windowing Toolkit - metin kipi pencereleme sistemi
 Name:		newt
-Version:	0.52.24
-Release:	3
+Version:	0.52.25
+Release:	1
 License:	LGPL v2
 Group:		Libraries
 Source0:	https://releases.pagure.org/newt/%{name}-%{version}.tar.gz
-# Source0-md5:	9a0630e2f59eaa3037aec94989c36c4a
+# Source0-md5:	cca66ed1d8774fb9e3f6a33525de416d
 Patch0:		%{name}-0.51.6-if1close.patch
 Patch1:		%{name}-nopython.patch
 Patch2:		%{name}-make.patch
@@ -142,7 +142,7 @@ Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
 Provides:	newt-python = %{version}-%{release}
 Provides:	snack = %{version}-%{release}
-Obsoletes:	newt-python
+Obsoletes:	newt-python < 0.52
 
 %description -n python-snack
 Python 2 binding for Newt library.

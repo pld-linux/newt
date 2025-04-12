@@ -1,6 +1,6 @@
---- newt-0.52.21/Makefile.in.orig	2019-10-01 22:10:00.730252641 +0200
-+++ newt-0.52.21/Makefile.in	2019-10-02 05:32:50.749643831 +0200
-@@ -69,19 +69,19 @@
+--- newt-0.52.25/Makefile.in.orig	2025-04-12 22:02:39.704767634 +0200
++++ newt-0.52.25/Makefile.in	2025-04-12 22:33:07.121534334 +0200
+@@ -69,19 +69,19 @@ endif
  all:	$(TARGET) $(SNACKSO)
  
  test:	test.o $(LIBNEWT)
@@ -24,8 +24,8 @@
 +	$(CC) $(CFLAGS) -o showkey showkey.o $(LIBNEWT) $(LDFLAGS) $(LIBS)
  
  _snack.$(SOEXT):   snack.c $(LIBNEWTSH)
- 	@[ -n "$(PYTHONVERS)" ] && for ver in $(PYTHONVERS); do \
-@@ -104,10 +104,10 @@
+ ifneq ($(PYTHONVERS),)
+@@ -104,10 +104,10 @@ endif
  	touch $@
  
  whiptail: $(NDIALOGOBJS) $(LIBNEWTSH)
@@ -38,7 +38,7 @@
  
  $(LIBNEWT): $(LIBOBJS)
  	ar rv $@ $^
-@@ -127,7 +127,7 @@
+@@ -127,7 +127,7 @@ depend:
  sharedlib: $(LIBNEWTSH)
  
  $(LIBNEWTSH): $(SHAREDOBJS)
